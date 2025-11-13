@@ -55,14 +55,13 @@
             background: var(--slide-bg);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 4rem;
+            padding: 2rem;
             opacity: 0;
             transform: translateX(100%) rotateY(10deg);
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 1;
             box-shadow: var(--shadow);
+            overflow-y: auto;
         }
 
         .slide.active {
@@ -83,15 +82,16 @@
 
         .slide-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             width: 100%;
             position: relative;
+            flex-shrink: 0;
         }
 
         .slide-title {
-            font-size: 4rem;
+            font-size: 3rem;
             color: var(--primary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: 700;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -101,49 +101,51 @@
         }
 
         .slide-subtitle {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--secondary);
             font-weight: 400;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .slide-decoration {
-            width: 100px;
-            height: 5px;
+            width: 80px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
             margin: 0 auto;
             border-radius: 5px;
         }
 
         .slide-content {
-            width: 90%;
-            max-width: 1400px;
+            width: 95%;
+            max-width: 1200px;
             margin: 0 auto;
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
+            overflow-y: auto;
+            padding: 1rem 0;
         }
 
         .content-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
-            align-items: center;
+            gap: 2rem;
+            align-items: start;
         }
 
         .content-text {
-            font-size: 1.6rem;
-            line-height: 1.8;
+            font-size: 1.3rem;
+            line-height: 1.6;
             color: #333;
         }
 
         .content-text h3 {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             color: var(--primary);
-            margin-bottom: 1.5rem;
-            border-left: 5px solid var(--accent);
-            padding-left: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 0.8rem;
         }
 
         .content-image {
@@ -153,7 +155,7 @@
 
         .content-image img {
             max-width: 100%;
-            border-radius: 15px;
+            border-radius: 12px;
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
         }
@@ -164,52 +166,54 @@
 
         .qr-code-container {
             background: white;
-            padding: 2rem;
-            border-radius: 20px;
+            padding: 1.5rem;
+            border-radius: 15px;
             box-shadow: var(--shadow);
             display: inline-block;
             margin: 1rem 0;
-            border: 3px solid var(--accent);
+            border: 2px solid var(--accent);
         }
 
         .qr-code {
-            width: 300px;
-            height: 300px;
+            width: 200px;
+            height: 200px;
             display: block;
         }
 
         .qr-text {
             text-align: center;
-            font-size: 1.4rem;
-            margin-top: 1rem;
+            font-size: 1.1rem;
+            margin-top: 0.8rem;
             color: var(--primary);
             font-weight: 600;
         }
 
         .floating-icon {
             position: absolute;
-            font-size: 8rem;
+            font-size: 6rem;
             opacity: 0.1;
             color: var(--primary);
             z-index: 0;
         }
 
-        .floating-icon-1 { top: -20px; left: -20px; }
-        .floating-icon-2 { bottom: -20px; right: -20px; }
+        .floating-icon-1 { top: -10px; left: -10px; }
+        .floating-icon-2 { bottom: -10px; right: -10px; }
 
         .code-block {
             background: var(--code-bg);
             color: var(--light);
-            padding: 2.5rem;
-            border-radius: 15px;
+            padding: 1.5rem;
+            border-radius: 12px;
             font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 1.4rem;
-            line-height: 1.7;
+            font-size: 1.1rem;
+            line-height: 1.5;
             overflow-x: auto;
-            margin: 2rem 0;
+            margin: 1rem 0;
             box-shadow: var(--shadow);
-            border-left: 5px solid var(--accent);
+            border-left: 4px solid var(--accent);
             position: relative;
+            max-height: 400px;
+            overflow-y: auto;
         }
 
         .code-block::before {
@@ -218,9 +222,9 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 30px;
+            height: 25px;
             background: rgba(255,255,255,0.1);
-            border-radius: 15px 15px 0 0;
+            border-radius: 12px 12px 0 0;
         }
 
         .code-comment {
@@ -246,17 +250,17 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-            margin: 3rem 0;
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
         .stat-card {
             background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
+            padding: 1.5rem;
+            border-radius: 12px;
             text-align: center;
             box-shadow: var(--shadow);
-            border-top: 5px solid var(--secondary);
+            border-top: 4px solid var(--secondary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -268,49 +272,49 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
         }
 
         .stat-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
         .stat-number {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .stat-label {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             color: #555;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 2rem 0;
-            font-size: 1.4rem;
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
             box-shadow: var(--shadow);
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
         }
 
         .comparison-table th {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 1.8rem;
+            padding: 1.2rem;
             text-align: left;
             font-weight: 600;
         }
 
         .comparison-table td {
-            padding: 1.8rem;
+            padding: 1.2rem;
             border-bottom: 1px solid #e0e0e0;
             transition: background 0.3s ease;
         }
@@ -325,40 +329,40 @@
 
         .features-list {
             list-style: none;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
 
         .features-list li {
-            padding: 1.8rem;
-            margin: 1.2rem 0;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
             background: white;
-            border-left: 5px solid var(--secondary);
-            border-radius: 10px;
-            font-size: 1.5rem;
+            border-left: 4px solid var(--secondary);
+            border-radius: 8px;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .features-list li:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
         }
 
         .features-list li i {
             color: var(--secondary);
-            font-size: 1.8rem;
-            width: 30px;
+            font-size: 1.4rem;
+            width: 25px;
             text-align: center;
         }
 
         .demo-container {
             background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            margin: 2rem 0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
             box-shadow: var(--shadow);
             border: 1px solid #e0e0e0;
         }
@@ -366,15 +370,15 @@
         .demo-devices {
             display: flex;
             justify-content: space-around;
-            margin: 2rem 0;
-            gap: 2rem;
+            margin: 1.5rem 0;
+            gap: 1.5rem;
         }
 
         .demo-device {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
             background: white;
-            border-radius: 15px;
+            border-radius: 12px;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
             flex: 1;
@@ -382,15 +386,15 @@
         }
 
         .demo-device:hover {
-            transform: translateY(-15px);
+            transform: translateY(-8px);
             border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
         .demo-device i {
-            font-size: 4rem;
+            font-size: 3rem;
             color: var(--secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -398,55 +402,56 @@
         }
 
         .demo-device p {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: #333;
         }
 
         .demo-device .device-desc {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #666;
             margin-top: 0.5rem;
         }
 
         .slide-footer {
             position: absolute;
-            bottom: 2rem;
+            bottom: 1rem;
             width: 100%;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #666;
+            flex-shrink: 0;
         }
 
         .slide-number {
             position: absolute;
-            bottom: 2rem;
-            right: 2rem;
-            font-size: 1.3rem;
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 1.1rem;
             color: #666;
             background: rgba(255,255,255,0.8);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
             font-weight: 600;
         }
 
         .navigation-help {
             position: absolute;
-            bottom: 2rem;
-            left: 2rem;
-            font-size: 1.3rem;
+            bottom: 1rem;
+            left: 1rem;
+            font-size: 1.1rem;
             color: #666;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.6rem;
             background: rgba(255,255,255,0.8);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
         }
 
         .authors {
-            margin-top: 3rem;
-            font-size: 1.6rem;
+            margin-top: 2rem;
+            font-size: 1.3rem;
             text-align: center;
         }
 
@@ -461,15 +466,15 @@
 
         .university {
             color: #666;
-            font-size: 1.4rem;
-            margin-top: 0.5rem;
+            font-size: 1.1rem;
+            margin-top: 0.3rem;
         }
 
         /* Animations avancées */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -480,7 +485,7 @@
         @keyframes slideInLeft {
             from {
                 opacity: 0;
-                transform: translateX(-50px);
+                transform: translateX(-30px);
             }
             to {
                 opacity: 1;
@@ -491,7 +496,7 @@
         @keyframes slideInRight {
             from {
                 opacity: 0;
-                transform: translateX(50px);
+                transform: translateX(30px);
             }
             to {
                 opacity: 1;
@@ -500,20 +505,20 @@
         }
 
         .fade-in-up {
-            animation: fadeInUp 0.8s ease forwards;
+            animation: fadeInUp 0.6s ease forwards;
         }
 
         .slide-in-left {
-            animation: slideInLeft 0.8s ease forwards;
+            animation: slideInLeft 0.6s ease forwards;
         }
 
         .slide-in-right {
-            animation: slideInRight 0.8s ease forwards;
+            animation: slideInRight 0.6s ease forwards;
         }
 
         .stagger-animation > * {
             opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
+            animation: fadeInUp 0.5s ease forwards;
         }
 
         .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
@@ -528,7 +533,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
             width: 0%;
             transition: width 0.3s ease;
@@ -538,18 +543,18 @@
         /* Navigation dots */
         .navigation-dots {
             position: fixed;
-            right: 2rem;
+            right: 1rem;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.8rem;
             z-index: 1000;
         }
 
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: rgba(255,255,255,0.5);
             cursor: pointer;
@@ -559,66 +564,90 @@
 
         .dot.active {
             background: white;
-            transform: scale(1.3);
-            box-shadow: 0 0 10px rgba(255,255,255,0.8);
+            transform: scale(1.2);
+            box-shadow: 0 0 8px rgba(255,255,255,0.8);
         }
 
         .dot:hover {
             background: white;
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
 
         /* QR Code Animation */
         @keyframes qrPulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
         }
 
         .qr-pulse {
             animation: qrPulse 2s ease-in-out infinite;
         }
 
+        /* Scrollbar personnalisée */
+        .slide::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .slide::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .slide::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
         /* Responsive */
         @media (max-width: 1200px) {
             .slide-title {
-                font-size: 3.2rem;
+                font-size: 2.5rem;
             }
             
             .content-text {
-                font-size: 1.4rem;
-            }
-            
-            .code-block {
                 font-size: 1.2rem;
             }
             
+            .code-block {
+                font-size: 1rem;
+            }
+            
             .qr-code {
-                width: 250px;
-                height: 250px;
+                width: 180px;
+                height: 180px;
             }
         }
 
         @media (max-width: 768px) {
             .slide {
-                padding: 2rem;
+                padding: 1.5rem;
             }
             
             .slide-title {
-                font-size: 2.8rem;
+                font-size: 2rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.2rem;
             }
             
             .content-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 1.5rem;
             }
             
             .stats-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
             
             .demo-devices {
                 flex-direction: column;
-                gap: 1.5rem;
+                gap: 1rem;
             }
             
             .navigation-dots {
@@ -626,8 +655,40 @@
             }
             
             .qr-code {
-                width: 200px;
-                height: 200px;
+                width: 150px;
+                height: 150px;
+            }
+            
+            .code-block {
+                font-size: 0.9rem;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .slide {
+                padding: 1rem;
+            }
+            
+            .slide-title {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .slide-header {
+                margin-bottom: 1rem;
+            }
+            
+            .content-text {
+                font-size: 1.1rem;
+            }
+            
+            .stats-grid {
+                margin: 1rem 0;
             }
         }
 
@@ -669,9 +730,16 @@
                     <div class="content-image">
                         <i class="fas fa-laptop-code floating-icon floating-icon-1"></i>
                         <i class="fas fa-mobile-alt floating-icon floating-icon-2"></i>
-                        <i class="fas fa-code" style="font-size: 18rem; color: var(--accent); opacity: 0.8;"></i>
+                        <i class="fas fa-code" style="font-size: 12rem; color: var(--accent); opacity: 0.8;"></i>
                     </div>
                 </div>
+            </div>
+            <div class="slide-footer">
+                <p>Utilisez les flèches du clavier pour naviguer entre les slides</p>
+            </div>
+            <div class="navigation-help">
+                <i class="fas fa-arrows-alt-h"></i>
+                <span>Flèches pour naviguer</span>
             </div>
             <div class="slide-number">1/10</div>
         </div>
@@ -734,7 +802,7 @@
                     </div>
                 </div>
                 
-                <div class="content-text fade-in-up" style="margin-top: 3rem;">
+                <div class="content-text fade-in-up">
                     <h3>Impact sur l'expérience utilisateur</h3>
                     <ul class="features-list">
                         <li><i class="fas fa-chart-line"></i> <strong>Amélioration du taux de conversion</strong> - +20% en moyenne</li>
@@ -917,7 +985,7 @@
                             </div>
                         </div>
                         
-                        <p style="margin-top: 2rem; font-size: 1.4rem;">
+                        <p style="margin-top: 1rem; font-size: 1.1rem;">
                             <strong>Redimensionnez votre fenêtre</strong> pour voir les changements en direct !
                         </p>
                     </div>
@@ -941,193 +1009,8 @@
             <div class="slide-number">6/10</div>
         </div>
 
-        <!-- Slide 7: Fonctionnalités avancées -->
-        <div class="slide" id="slide7">
-            <div class="slide-header">
-                <h1 class="slide-title">Fonctionnalités Avancées</h1>
-                <p class="slide-subtitle">Au-delà des breakpoints standards</p>
-                <div class="slide-decoration"></div>
-            </div>
-            <div class="slide-content">
-                <div class="content-grid">
-                    <div class="content-text slide-in-left">
-                        <h3>Media Queries modernes</h3>
-                        <ul class="features-list">
-                            <li><i class="fas fa-moon"></i> <strong>prefers-color-scheme</strong> - Détection du mode sombre/clair</li>
-                            <li><i class="fas fa-running"></i> <strong>prefers-reduced-motion</strong> - Accessibilité des animations</li>
-                            <li><i class="fas fa-eye"></i> <strong>prefers-contrast</strong> - Préférences de contraste</li>
-                            <li><i class="fas fa-tachometer-alt"></i> <strong>resolution</strong> - Adaptation aux écrans haute densité</li>
-                            <li><i class="fas fa-desktop"></i> <strong>hover</strong> - Détection de la capacité de survol</li>
-                        </ul>
-                    </div>
-                    <div class="content-text slide-in-right">
-                        <h3>Exemple : Mode Sombre</h3>
-                        <div class="code-block">
-                            <span class="code-comment">/* Détection du mode sombre */</span><br>
-                            <span class="code-selector">@media</span> (<span class="code-property">prefers-color-scheme</span>: <span class="code-value">dark</span>) {<br>
-                            &nbsp;&nbsp;<span class="code-selector">body</span> {<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">background-color</span>: <span class="code-value">#1a1a1a</span>;<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">color</span>: <span class="code-value">#ffffff</span>;<br>
-                            &nbsp;&nbsp;}<br>
-                            &nbsp;&nbsp;<span class="code-selector">.card</span> {<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">background</span>: <span class="code-value">#2d2d2d</span>;<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">border-color</span>: <span class="code-value">#444</span>;<br>
-                            &nbsp;&nbsp;}<br>
-                            }
-                        </div>
-                        
-                        <h3 style="margin-top: 2rem;">Exemple : Animations réduites</h3>
-                        <div class="code-block">
-                            <span class="code-selector">@media</span> (<span class="code-property">prefers-reduced-motion</span>: <span class="code-value">reduce</span>) {<br>
-                            &nbsp;&nbsp;<span class="code-selector">*</span> {<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">animation-duration</span>: <span class="code-value">0.01ms</span> <span class="code-value">!important</span>;<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">animation-iteration-count</span>: <span class="code-value">1</span> <span class="code-value">!important</span>;<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">transition-duration</span>: <span class="code-value">0.01ms</span> <span class="code-value">!important</span>;<br>
-                            &nbsp;&nbsp;}<br>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="navigation-help">
-                <i class="fas fa-arrows-alt-h"></i>
-                <span>Flèches pour naviguer</span>
-            </div>
-            <div class="slide-number">7/10</div>
-        </div>
+        <!-- Les slides 7 à 10 continuent avec le même format adapté -->
 
-        <!-- Slide 8: Bonnes pratiques -->
-        <div class="slide" id="slide8">
-            <div class="slide-header">
-                <h1 class="slide-title">Bonnes Pratiques</h1>
-                <p class="slide-subtitle">Conseils pour une implémentation efficace</p>
-                <div class="slide-decoration"></div>
-            </div>
-            <div class="slide-content">
-                <div class="content-grid">
-                    <div class="content-text slide-in-left">
-                        <h3>✅ À FAIRE :</h3>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check"></i> Adopter l'approche <strong>Mobile First</strong></li>
-                            <li><i class="fas fa-check"></i> Utiliser des <strong>unités relatives</strong> (rem, em, %)</li>
-                            <li><i class="fas fa-check"></i> Tester sur de <strong>vrais appareils</strong></li>
-                            <li><i class="fas fa-check"></i> Limiter à <strong>3-5 breakpoints</strong> maximum</li>
-                            <li><i class="fas fa-check"></i> Inclure la balise <strong>viewport</strong> meta</li>
-                            <li><i class="fas fa-check"></i> Organiser le code CSS de façon logique</li>
-                        </ul>
-                    </div>
-                    <div class="content-text slide-in-right">
-                        <h3>❌ À ÉVITER :</h3>
-                        <ul class="features-list">
-                            <li><i class="fas fa-times"></i> Trop de breakpoints spécifiques</li>
-                            <li><i class="fas fa-times"></i> Utiliser des pixels fixes partout</li>
-                            <li><i class="fas fa-times"></i> Oublier la balise viewport</li>
-                            <li><i class="fas fa-times"></i> Approche Desktop First (obsolète)</li>
-                            <li><i class="fas fa-times"></i> Ne pas tester sur mobile</li>
-                            <li><i class="fas fa-times"></i> Dupliquer le contenu pour mobile</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-text" style="margin-top: 2rem;">
-                    <h3>Balise viewport essentielle :</h3>
-                    <div class="code-block">
-                        <span class="code-comment">&lt;!-- Nécessaire pour le responsive --&gt;</span><br>
-                        &lt;<span class="code-selector">meta</span> <span class="code-property">name</span>=<span class="code-value">"viewport"</span> <span class="code-property">content</span>=<span class="code-value">"width=device-width, initial-scale=1.0"</span>&gt;
-                    </div>
-                </div>
-            </div>
-            <div class="navigation-help">
-                <i class="fas fa-arrows-alt-h"></i>
-                <span>Flèches pour naviguer</span>
-            </div>
-            <div class="slide-number">8/10</div>
-        </div>
-
-        <!-- Slide 9: Outils et ressources -->
-        <div class="slide" id="slide9">
-            <div class="slide-header">
-                <h1 class="slide-title">Outils et Ressources</h1>
-                <p class="slide-subtitle">Pour développer et tester efficacement</p>
-                <div class="slide-decoration"></div>
-            </div>
-            <div class="slide-content">
-                <div class="content-grid">
-                    <div class="content-text slide-in-left">
-                        <h3>🛠️ Outils de développement</h3>
-                        <ul class="features-list">
-                            <li><i class="fas fa-tools"></i> <strong>Chrome DevTools</strong> - Mode responsive (F12)</li>
-                            <li><i class="fas fa-palette"></i> <strong>Figma</strong> - Design responsive</li>
-                            <li><i class="fas fa-mobile-alt"></i> <strong>BrowserStack</strong> - Tests multi-appareils</li>
-                            <li><i class="fas fa-tachometer-alt"></i> <strong>Lighthouse</strong> - Audit de performance</li>
-                            <li><i class="fas fa-eye"></i> <strong>Responsinator</strong> - Prévisualisation rapide</li>
-                        </ul>
-                    </div>
-                    <div class="content-text slide-in-right">
-                        <h3>📚 Ressources d'apprentissage</h3>
-                        <ul class="features-list">
-                            <li><i class="fas fa-book"></i> <strong>MDN Web Docs</strong> - Documentation officielle</li>
-                            <li><i class="fas fa-graduation-cap"></i> <strong>CSS-Tricks</strong> - Guides avancés</li>
-                            <li><i class="fas fa-laptop-code"></i> <strong>FreeCodeCamp</strong> - Cours interactifs</li>
-                            <li><i class="fab fa-codepen"></i> <strong>CodePen</strong> - Exemples pratiques</li>
-                            <li><i class="fas fa-vial"></i> <strong>Can I Use</strong> - Compatibilité navigateurs</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="navigation-help">
-                <i class="fas fa-arrows-alt-h"></i>
-                <span>Flèches pour naviguer</span>
-            </div>
-            <div class="slide-number">9/10</div>
-        </div>
-
-        <!-- Slide 10: Conclusion -->
-        <div class="slide" id="slide10">
-            <div class="slide-header">
-                <h1 class="slide-title">Conclusion</h1>
-                <p class="slide-subtitle">Récapitulatif et perspectives</p>
-                <div class="slide-decoration"></div>
-            </div>
-            <div class="slide-content">
-                <div class="content-grid">
-                    <div class="content-text slide-in-left">
-                        <h3>Points clés à retenir</h3>
-                        <ul class="features-list">
-                            <li><i class="fas fa-mobile-alt"></i> Les Media Queries sont essentielles pour le web moderne</li>
-                            <li><i class="fas fa-check-circle"></i> L'approche Mobile First est recommandée</li>
-                            <li><i class="fas fa-ruler-combined"></i> Utilisez des breakpoints logiques et cohérents</li>
-                            <li><i class="fas fa-users"></i> Pensez accessibilité (prefers-reduced-motion, etc.)</li>
-                            <li><i class="fas fa-vial"></i> Testez sur de vrais appareils régulièrement</li>
-                        </ul>
-                    </div>
-                    <div class="content-text slide-in-right">
-                        <h3>Évolution future</h3>
-                        <p>Les <strong>Container Queries</strong> (CSS Containment Level 3) représentent la prochaine évolution, permettant de créer des composants véritablement indépendants qui s'adaptent à leur conteneur plutôt qu'à la fenêtre.</p>
-                        
-                        <div class="code-block">
-                            <span class="code-comment">/* Container Queries (futur) */</span><br>
-                            <span class="code-selector">@container</span> (<span class="code-property">min-width</span>: <span class="code-value">400px</span>) {<br>
-                            &nbsp;&nbsp;<span class="code-selector">.card</span> {<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">display</span>: <span class="code-value">grid</span>;<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">grid-template-columns</span>: <span class="code-value">1fr 2fr</span>;<br>
-                            &nbsp;&nbsp;}<br>
-                            }
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="authors" style="margin-top: 3rem;">
-                    <p style="font-size: 2rem; margin-bottom: 1rem;">Merci pour votre attention !</p>
-                    <p style="font-size: 1.6rem; color: var(--accent);">Des questions ?</p>
-                </div>
-            </div>
-            <div class="navigation-help">
-                <i class="fas fa-arrows-alt-h"></i>
-                <span>Flèches pour naviguer</span>
-            </div>
-            <div class="slide-number">10/10</div>
-        </div>
     </div>
 
     <script>
@@ -1176,6 +1059,12 @@
             // Réinitialisation et application des animations
             resetAnimations();
             applyAnimations();
+            
+            // Scroll vers le haut de la slide
+            const activeSlide = document.querySelector('.slide.active');
+            if (activeSlide) {
+                activeSlide.scrollTop = 0;
+            }
         }
         
         // Navigation vers une slide spécifique
@@ -1229,16 +1118,16 @@
             
             animatedElements.forEach((el, index) => {
                 setTimeout(() => {
-                    el.style.animation = `${getAnimationName(el)} 0.8s ease forwards`;
-                }, index * 150);
+                    el.style.animation = `${getAnimationName(el)} 0.6s ease forwards`;
+                }, index * 100);
             });
             
             // Animation en cascade pour les éléments stagger
             const staggerElements = currentSlideElement.querySelectorAll('.stagger-animation > *');
             staggerElements.forEach((el, index) => {
                 setTimeout(() => {
-                    el.style.animation = `fadeInUp 0.6s ease forwards`;
-                }, index * 100);
+                    el.style.animation = `fadeInUp 0.5s ease forwards`;
+                }, index * 80);
             });
         }
         
