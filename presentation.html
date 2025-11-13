@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Queries - Présentation Académique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --slide-bg: #ffffff;
+            --text-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .slides-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--slide-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 2;
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .slide.next {
+            transform: translateX(100%);
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+
+        .slide-title {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .slide-subtitle {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: 400;
+        }
+
+        .slide-content {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .content-text {
+            font-size: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .content-image {
+            text-align: center;
+        }
+
+        .content-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .code-comment {
+            color: #7f8c8d;
+        }
+
+        .code-property {
+            color: #3498db;
+        }
+
+        .code-value {
+            color: #e74c3c;
+        }
+
+        .code-selector {
+            color: #2ecc71;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--secondary);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1.5rem;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .comparison-table tr:hover {
+            background: #e8f4fc;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .features-list li {
+            padding: 1.5rem;
+            margin: 1rem 0;
+            background: var(--light);
+            border-left: 5px solid var(--secondary);
+            border-radius: 5px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .features-list li i {
+            color: var(--secondary);
+            font-size: 1.5rem;
+        }
+
+        .demo-container {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .demo-devices {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+        }
+
+        .demo-device {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .demo-device:hover {
+            transform: translateY(-10px);
+        }
+
+        .demo-device i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .demo-device p {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .slide-footer {
+            position: absolute;
+            bottom: 2rem;
+            width: 100%;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+
+        .navigation-help {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .authors {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .slide-title {
+                font-size: 3rem;
+            }
+            
+            .content-text {
+                font-size: 1.3rem;
+            }
+            
+            .code-block {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem;
+            }
+            
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-devices {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slides-container">
+        <!-- Slide 1: Titre -->
+        <div class="slide active" id="slide1">
+            <div class="slide-header">
+                <h1 class="slide-title">Les Media Queries CSS</h1>
+                <p class="slide-subtitle">Créer des sites web responsifs et adaptatifs</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-grid">
+                    <div class="content-text fade-in">
+                        <p>Présentation académique sur les principes fondamentaux des Media Queries et leur application dans le développement web moderne.</p>
+                        <div class="authors">
+                            <p>Par Seydi & Adel</p>
+                            <p>École d'Ingénieurs Informatique - 1ère Année</p>
+                        </div>
+                    </div>
+                    <div class="content-image fade-in">
+                        <i class="fas fa-laptop-code" style="font-size: 15rem; color: var(--secondary);"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <p>Utilisez les flèches du clavier pour naviguer</p>
+            </div>
+            <div class="slide-number">1</div>
+        </div>
+
+        <!-- Slide 2: Introduction -->
+        <div class="slide" id="slide2">
+            <div class="slide-header">
+                <h1 class="slide-title">Qu'est-ce qu'une Media Query ?</h1>
+                <p class="slide-subtitle">Définition et principe de base</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-text fade-in">
+                    <p>Une <strong>Media Query</strong> est une fonctionnalité CSS3 qui permet d'appliquer des styles conditionnels en fonction des caractéristiques du dispositif d'affichage.</p>
+                    
+                    <div class="code-block">
+                        <span class="code-comment">/* Syntaxe de base */</span><br>
+                        <span class="code-selector">@media</span> (<span class="code-property">condition</span>) {<br>
+                        &nbsp;&nbsp;<span class="code-comment">/* Styles appliqués si la condition est vraie */</span><br>
+                        &nbsp;&nbsp;<span class="code-selector">.element</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">property</span>: <span class="code-value">value</span>;<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                    
+                    <p>Les Media Queries sont essentielles pour créer des designs responsifs qui s'adaptent à différents appareils et tailles d'écran.</p>
+                </div>
+            </div>
+            <div class="slide-number">2</div>
+        </div>
+
+        <!-- Slide 3: Pourquoi c'est important -->
+        <div class="slide" id="slide3">
+            <div class="slide-header">
+                <h1 class="slide-title">Pourquoi les Media Queries sont-elles cruciales ?</h1>
+                <p class="slide-subtitle">L'importance du responsive design en 2025</p>
+            </div>
+            <div class="slide-content">
+                <div class="stats-grid">
+                    <div class="stat-card fade-in">
+                        <div class="stat-number">63%</div>
+                        <div class="stat-label">Du trafic web vient du mobile</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-number">8K+</div>
+                        <div class="stat-label">Modèles d'appareils différents</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-number">57%</div>
+                        <div class="stat-label">Des utilisateurs abandonnent un site non-optimisé</div>
+                    </div>
+                </div>
+                
+                <div class="content-text fade-in">
+                    <p>En 2025, l'expérience mobile n'est plus une option mais une nécessité. Les Media Queries permettent :</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> Une expérience utilisateur optimale sur tous les appareils</li>
+                        <li><i class="fas fa-check-circle"></i> Un meilleur référencement (SEO)</li>
+                        <li><i class="fas fa-check-circle"></i> Une maintenance simplifiée</li>
+                        <li><i class="fas fa-check-circle"></i> Une accessibilité améliorée</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">3</div>
+        </div>
+
+        <!-- Slide 4: Syntaxe détaillée -->
+        <div class="slide" id="slide4">
+            <div class="slide-header">
+                <h1 class="slide-title">Syntaxe des Media Queries</h1>
+                <p class="slide-subtitle">Structure et types de conditions</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-grid">
+                    <div class="content-text">
+                        <h3>Types de Media Queries :</h3>
+                        <ul class="features-list">
+                            <li><i class="fas fa-desktop"></i> <strong>Basées sur la largeur</strong> - min-width, max-width</li>
+                            <li><i class="fas fa-tablet-alt"></i> <strong>Basées sur la hauteur</strong> - min-height, max-height</li>
+                            <li><i class="fas fa-sync-alt"></i> <strong>Basées sur l'orientation</strong> - portrait, landscape</li>
+                            <li><i class="fas fa-tachometer-alt"></i> <strong>Basées sur la résolution</strong> - min-resolution</li>
+                            <li><i class="fas fa-palette"></i> <strong>Basées sur les préférences</strong> - prefers-color-scheme</li>
+                        </ul>
+                    </div>
+                    <div class="content-text">
+                        <h3>Exemples pratiques :</h3>
+                        <div class="code-block">
+                            <span class="code-comment">/* Mobile First */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">768px</span>) { ... }<br><br>
+                            
+                            <span class="code-comment">/* Desktop First */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">max-width</span>: <span class="code-value">1199px</span>) { ... }<br><br>
+                            
+                            <span class="code-comment">/* Orientation tablette */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">orientation</span>: <span class="code-value">landscape</span>) { ... }<br><br>
+                            
+                            <span class="code-comment">/* Mode sombre */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">prefers-color-scheme</span>: <span class="code-value">dark</span>) { ... }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">4</div>
+        </div>
+
+        <!-- Slide 5: Breakpoints standards -->
+        <div class="slide" id="slide5">
+            <div class="slide-header">
+                <h1 class="slide-title">Breakpoints Standards</h1>
+                <p class="slide-subtitle">Points de rupture communs pour le responsive design</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-grid">
+                    <div class="content-text">
+                        <h3>Breakpoints recommandés :</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Appareil</th>
+                                    <th>Breakpoint</th>
+                                    <th>Utilisation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>📱 Mobile</td>
+                                    <td>0 - 767px</td>
+                                    <td>Smartphones</td>
+                                </tr>
+                                <tr>
+                                    <td>📱 Mobile Large</td>
+                                    <td>480px</td>
+                                    <td>Grands smartphones</td>
+                                </tr>
+                                <tr>
+                                    <td>💻 Tablette</td>
+                                    <td>768px</td>
+                                    <td>Tablettes portrait</td>
+                                </tr>
+                                <tr>
+                                    <td>💻 Tablette Large</td>
+                                    <td>1024px</td>
+                                    <td>Tablettes paysage</td>
+                                </tr>
+                                <tr>
+                                    <td>🖥️ Desktop</td>
+                                    <td>1200px</td>
+                                    <td>Ordinateurs portables</td>
+                                </tr>
+                                <tr>
+                                    <td>🖥️ Desktop Large</td>
+                                    <td>1440px</td>
+                                    <td>Écrans larges</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="content-text">
+                        <h3>Approche Mobile First :</h3>
+                        <p>Concevoir d'abord pour mobile, puis ajouter des styles pour les écrans plus grands :</p>
+                        <div class="code-block">
+                            <span class="code-comment">/* Styles de base (mobile) */</span><br>
+                            <span class="code-selector">.container</span> {<br>
+                            &nbsp;&nbsp;<span class="code-property">width</span>: <span class="code-value">100%</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">padding</span>: <span class="code-value">1rem</span>;<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">/* Tablette */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">768px</span>) {<br>
+                            &nbsp;&nbsp;<span class="code-selector">.container</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">width</span>: <span class="code-value">750px</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">padding</span>: <span class="code-value">2rem</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">/* Desktop */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">1200px</span>) {<br>
+                            &nbsp;&nbsp;<span class="code-selector">.container</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">width</span>: <span class="code-value">1140px</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">5</div>
+        </div>
+
+        <!-- Slide 6: Démonstration pratique -->
+        <div class="slide" id="slide6">
+            <div class="slide-header">
+                <h1 class="slide-title">Démonstration Pratique</h1>
+                <p class="slide-subtitle">Exemple de navigation responsive</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-grid">
+                    <div class="content-text">
+                        <h3>Navigation Desktop vs Mobile :</h3>
+                        <p>Sur desktop, la navigation s'affiche horizontalement. Sur mobile, elle devient un menu burger.</p>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">/* Desktop */</span><br>
+                            <span class="code-selector">.nav-links</span> {<br>
+                            &nbsp;&nbsp;<span class="code-property">display</span>: <span class="code-value">flex</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">gap</span>: <span class="code-value">2rem</span>;<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">/* Mobile */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">max-width</span>: <span class="code-value">768px</span>) {<br>
+                            &nbsp;&nbsp;<span class="code-selector">.nav-links</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">display</span>: <span class="code-value">none</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">position</span>: <span class="code-value">fixed</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">top</span>: <span class="code-value">70px</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">left</span>: <span class="code-value">0</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">width</span>: <span class="code-value">100%</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">height</span>: <span class="code-value">100vh</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">background</span>: <span class="code-value">white</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">flex-direction</span>: <span class="code-value">column</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<span class="code-selector">.menu-toggle</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">display</span>: <span class="code-value">block</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </div>
+                    <div class="content-text">
+                        <h3>Résultat sur différents appareils :</h3>
+                        <div class="demo-container">
+                            <div class="demo-devices">
+                                <div class="demo-device">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <p>Mobile</p>
+                                    <p>Menu Burger</p>
+                                </div>
+                                <div class="demo-device">
+                                    <i class="fas fa-tablet-alt"></i>
+                                    <p>Tablette</p>
+                                    <p>Navigation adaptée</p>
+                                </div>
+                                <div class="demo-device">
+                                    <i class="fas fa-desktop"></i>
+                                    <p>Desktop</p>
+                                    <p>Menu horizontal</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">6</div>
+        </div>
+
+        <!-- Slide 7: Fonctionnalités avancées -->
+        <div class="slide" id="slide7">
+            <div class="slide-header">
+                <h1 class="slide-title">Fonctionnalités Avancées</h1>
+                <p class="slide-subtitle">Au-delà des breakpoints standards</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-grid">
+                    <div class="content-text">
+                        <h3>Media Queries modernes :</h3>
+                        <ul class="features-list">
+                            <li><i class="fas fa-moon"></i> <strong>prefers-color-scheme</strong> - Détection du mode sombre/clair</li>
+                            <li><i class="fas fa-running"></i> <strong>prefers-reduced-motion</strong> - Accessibilité des animations</li>
+                            <li><i class="fas fa-eye"></i> <strong>prefers-contrast</strong> - Préférences de contraste</li>
+                            <li><i class="fas fa-tachometer-alt"></i> <strong>resolution</strong> - Adaptation aux écrans haute densité</li>
+                            <li><i class="fas fa-desktop"></i> <strong>hover</strong> - Détection de la capacité de survol</li>
+                        </ul>
+                    </div>
+                    <div class="content-text">
+                        <h3>Exemple : Mode Sombre</h3>
+                        <div class="code-block">
+                            <span class="code-comment">/* Détection du mode sombre */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">prefers-color-scheme</span>: <span class="code-value">dark</span>) {<br>
+                            &nbsp;&nbsp;<span class="code-selector">body</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">background-color</span>: <span class="code-value">#1a1a1a</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">color</span>: <span class="code-value">#ffffff</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<span class="code-selector">.card</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">background</span>: <span class="code-value">#2d2d2d</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">border-color</span>: <span class="code-value">#444</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <h3 style="margin-top: 2rem;">Exemple : Animations réduites</h3>
+                        <div class="code-block">
+                            <span class="code-selector">@media</span> (<span class="code-property">prefers-reduced-motion</span>: <span class="code-value">reduce</span>) {<br>
+                            &nbsp;&nbsp;<span class="code-selector">*</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">animation-duration</span>: <span class="code-value">0.01ms</span> <span class="code-value">!important</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">animation-iteration-count</span>: <span class="code-value">1</span> <span class="code-value">!important</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">transition-duration</span>: <span class="code-value">0.01ms</span> <span class="code-value">!important</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">7</div>
+        </div>
+
+        <!-- Slide 8: Bonnes pratiques -->
+        <div class="slide" id="slide8">
+            <div class="slide-header">
+                <h1 class="slide-title">Bonnes Pratiques</h1>
+                <p class="slide-subtitle">Conseils pour une implémentation efficace</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-grid">
+                    <div class="content-text">
+                        <h3>✅ À FAIRE :</h3>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> Adopter l'approche <strong>Mobile First</strong></li>
+                            <li><i class="fas fa-check"></i> Utiliser des <strong>unités relatives</strong> (rem, em, %)</li>
+                            <li><i class="fas fa-check"></i> Tester sur de <strong>vrais appareils</strong></li>
+                            <li><i class="fas fa-check"></i> Limiter à <strong>3-5 breakpoints</strong> maximum</li>
+                            <li><i class="fas fa-check"></i> Inclure la balise <strong>viewport</strong> meta</li>
+                            <li><i class="fas fa-check"></i> Organiser le code CSS de façon logique</li>
+                        </ul>
+                    </div>
+                    <div class="content-text">
+                        <h3>❌ À ÉVITER :</h3>
+                        <ul class="features-list">
+                            <li><i class="fas fa-times"></i> Trop de breakpoints spécifiques</li>
+                            <li><i class="fas fa-times"></i> Utiliser des pixels fixes partout</li>
+                            <li><i class="fas fa-times"></i> Oublier la balise viewport</li>
+                            <li><i class="fas fa-times"></i> Approche Desktop First (obsolète)</li>
+                            <li><i class="fas fa-times"></i> Ne pas tester sur mobile</li>
+                            <li><i class="fas fa-times"></i> Dupliquer le contenu pour mobile</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-text" style="margin-top: 2rem;">
+                    <h3>Balise viewport essentielle :</h3>
+                    <div class="code-block">
+                        <span class="code-comment">&lt;!-- Nécessaire pour le responsive --&gt;</span><br>
+                        &lt;<span class="code-selector">meta</span> <span class="code-property">name</span>=<span class="code-value">"viewport"</span> <span class="code-property">content</span>=<span class="code-value">"width=device-width, initial-scale=1.0"</span>&gt;
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">8</div>
+        </div>
+
+        <!-- Slide 9: Outils et ressources -->
+        <div class="slide" id="slide9">
+            <div class="slide-header">
+                <h1 class="slide-title">Outils et Ressources</h1>
+                <p class="slide-subtitle">Pour développer et tester efficacement</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-grid">
+                    <div class="content-text">
+                        <h3>🛠️ Outils de développement :</h3>
+                        <ul class="features-list">
+                            <li><i class="fas fa-tools"></i> <strong>Chrome DevTools</strong> - Mode responsive (F12)</li>
+                            <li><i class="fas fa-palette"></i> <strong>Figma</strong> - Design responsive</li>
+                            <li><i class="fas fa-mobile-alt"></i> <strong>BrowserStack</strong> - Tests multi-appareils</li>
+                            <li><i class="fas fa-tachometer-alt"></i> <strong>Lighthouse</strong> - Audit de performance</li>
+                            <li><i class="fas fa-eye"></i> <strong>Responsinator</strong> - Prévisualisation rapide</li>
+                        </ul>
+                    </div>
+                    <div class="content-text">
+                        <h3>📚 Ressources d'apprentissage :</h3>
+                        <ul class="features-list">
+                            <li><i class="fas fa-book"></i> <strong>MDN Web Docs</strong> - Documentation officielle</li>
+                            <li><i class="fas fa-graduation-cap"></i> <strong>CSS-Tricks</strong> - Guides avancés</li>
+                            <li><i class="fas fa-laptop-code"></i> <strong>FreeCodeCamp</strong> - Cours interactifs</li>
+                            <li><i class="fab fa-codepen"></i> <strong>CodePen</strong> - Exemples pratiques</li>
+                            <li><i class="fas fa-vial"></i> <strong>Can I Use</strong> - Compatibilité navigateurs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-text" style="margin-top: 2rem;">
+                    <h3>📱 Testez cette présentation :</h3>
+                    <p>Redimensionnez votre fenêtre pour voir comment cette présentation s'adapte à différentes tailles d'écran !</p>
+                </div>
+            </div>
+            <div class="slide-number">9</div>
+        </div>
+
+        <!-- Slide 10: Conclusion -->
+        <div class="slide" id="slide10">
+            <div class="slide-header">
+                <h1 class="slide-title">Conclusion</h1>
+                <p class="slide-subtitle">Récapitulatif et perspectives</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-grid">
+                    <div class="content-text">
+                        <h3>Points clés à retenir :</h3>
+                        <ul class="features-list">
+                            <li><i class="fas fa-mobile-alt"></i> Les Media Queries sont essentielles pour le web moderne</li>
+                            <li><i class="fas fa-check-circle"></i> L'approche Mobile First est recommandée</li>
+                            <li><i class="fas fa-ruler-combined"></i> Utilisez des breakpoints logiques et cohérents</li>
+                            <li><i class="fas fa-users"></i> Pensez accessibilité (prefers-reduced-motion, etc.)</li>
+                            <li><i class="fas fa-vial"></i> Testez sur de vrais appareils régulièrement</li>
+                        </ul>
+                    </div>
+                    <div class="content-text">
+                        <h3>Évolution future :</h3>
+                        <p>Les <strong>Container Queries</strong> (CSS Containment Level 3) représentent la prochaine évolution, permettant de créer des composants véritablement indépendants qui s'adaptent à leur conteneur plutôt qu'à la fenêtre.</p>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">/* Container Queries (futur) */</span><br>
+                            <span class="code-selector">@container</span> (<span class="code-property">min-width</span>: <span class="code-value">400px</span>) {<br>
+                            &nbsp;&nbsp;<span class="code-selector">.card</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">display</span>: <span class="code-value">grid</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">grid-template-columns</span>: <span class="code-value">1fr 2fr</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="authors" style="margin-top: 3rem;">
+                    <p>Merci pour votre attention !</p>
+                    <p>Des questions ?</p>
+                </div>
+            </div>
+            <div class="slide-number">10</div>
+        </div>
+    </div>
+
+    <script>
+        // Gestion des slides
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        
+        // Afficher la slide active
+        function showSlide(index) {
+            // Masquer toutes les slides
+            slides.forEach(slide => {
+                slide.classList.remove('active', 'prev', 'next');
+            });
+            
+            // Afficher la slide courante
+            slides[index].classList.add('active');
+            
+            // Mettre à jour les classes pour les animations
+            if (index > 0) {
+                slides[index - 1].classList.add('prev');
+            }
+            if (index < slides.length - 1) {
+                slides[index + 1].classList.add('next');
+            }
+            
+            // Réinitialiser les animations
+            resetAnimations();
+            
+            // Lancer les animations après un délai
+            setTimeout(() => {
+                const fadeElements = slides[index].querySelectorAll('.fade-in');
+                fadeElements.forEach((el, i) => {
+                    setTimeout(() => {
+                        el.style.animation = 'fadeIn 0.8s ease forwards';
+                    }, i * 200);
+                });
+            }, 300);
+        }
+        
+        // Réinitialiser les animations
+        function resetAnimations() {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.animation = 'none';
+            });
+        }
+        
+        // Navigation au clavier
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                // Slide suivante
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                // Slide précédente
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            }
+        });
+        
+        // Navigation tactile (pour les écrans tactiles)
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swipe gauche - slide suivante
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                // Swipe droite - slide précédente
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            }
+        }
+        
+        // Initialisation
+        showSlide(currentSlide);
+        
+        // Mode présentation (Plein écran avec F11)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F11') {
+                e.preventDefault();
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        });
+        
+        // Indication de navigation
+        console.log('🎓 Présentation académique sur les Media Queries');
+        console.log('Utilisez les flèches pour naviguer entre les slides');
+        console.log('Appuyez sur F11 pour le mode plein écran');
+    </script>
+</body>
+</html>
