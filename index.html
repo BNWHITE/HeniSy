@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Queries CSS | Seydi & Adel</title>
+    <title>Media Queries CSS | Présentation Interactive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -17,6 +18,9 @@
             --accent: #ec4899;
             --dark: #0f172a;
             --light: #f8fafc;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
         }
 
         body {
@@ -25,9 +29,10 @@
             color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Navigation */
+        /* Navigation améliorée */
         .navbar {
             position: fixed;
             top: 0;
@@ -56,6 +61,9 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-links {
@@ -70,6 +78,9 @@
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-links a::after {
@@ -93,6 +104,7 @@
             gap: 5px;
             cursor: pointer;
             padding: 5px;
+            z-index: 1001;
         }
 
         .menu-toggle span {
@@ -103,7 +115,7 @@
             border-radius: 3px;
         }
 
-        /* Hero Section */
+        /* Hero Section améliorée */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -134,6 +146,7 @@
             text-align: center;
             z-index: 1;
             animation: fadeInUp 1s ease-out;
+            max-width: 800px;
         }
 
         @keyframes fadeInUp {
@@ -181,6 +194,7 @@
             font-size: 1.1rem;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin: 0.5rem;
         }
 
         .cta-button:hover {
@@ -188,7 +202,13 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
-        /* Section */
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* Section améliorée */
         section {
             padding: 5rem 2rem;
             max-width: 1200px;
@@ -203,13 +223,40 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        /* QR Code Section */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        /* QR Code Section améliorée */
         .qr-section {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             padding: 5rem 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
         }
 
         .qr-container {
@@ -219,6 +266,8 @@
             display: inline-block;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes pulse {
@@ -237,15 +286,19 @@
             font-size: 1.5rem;
             margin-top: 2rem;
             font-weight: bold;
+            position: relative;
+            z-index: 1;
         }
 
         .qr-subtext {
             color: rgba(255,255,255,0.9);
             margin-top: 1rem;
             font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Demo Cards */
+        /* Demo Cards améliorées */
         .demo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -260,6 +313,18 @@
             padding: 2rem;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
         }
 
         .demo-card:hover {
@@ -272,9 +337,12 @@
             color: var(--primary);
             font-size: 1.5rem;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        /* Code Block */
+        /* Code Block amélioré */
         .code-showcase {
             background: #1e293b;
             border-radius: 15px;
@@ -283,6 +351,7 @@
             overflow-x: auto;
             border: 2px solid rgba(99, 102, 241, 0.3);
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .code-showcase::before {
@@ -305,13 +374,30 @@
             line-height: 1.6;
         }
 
-        /* Interactive Demo */
+        .code-showcase .comment {
+            color: #64748b;
+        }
+
+        .code-showcase .property {
+            color: #7dd3fc;
+        }
+
+        .code-showcase .value {
+            color: #f0abfc;
+        }
+
+        .code-showcase .selector {
+            color: #fde68a;
+        }
+
+        /* Interactive Demo amélioré */
         .live-demo {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 3rem;
             border-radius: 20px;
             margin: 3rem 0;
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
         .device-preview {
@@ -329,13 +415,21 @@
             font-weight: bold;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
 
         .device:hover {
             transform: scale(1.1);
         }
 
-        /* Breakpoint Indicator */
+        .device i {
+            font-size: 2.5rem;
+        }
+
+        /* Breakpoint Indicator amélioré */
         .breakpoint-badge {
             position: fixed;
             bottom: 2rem;
@@ -348,6 +442,9 @@
             box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
             z-index: 999;
             animation: slideInRight 0.5s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         @keyframes slideInRight {
@@ -365,7 +462,7 @@
             content: '🖥️ Desktop';
         }
 
-        /* Stats Section */
+        /* Stats Section améliorée */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -379,6 +476,18 @@
             border-radius: 20px;
             text-align: center;
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
         }
 
         .stat-card:hover {
@@ -396,7 +505,7 @@
             opacity: 0.9;
         }
 
-        /* Features List */
+        /* Features List améliorée */
         .features-list {
             list-style: none;
             margin: 2rem 0;
@@ -409,6 +518,9 @@
             border-left: 4px solid var(--primary);
             border-radius: 10px;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .features-list li:hover {
@@ -416,7 +528,14 @@
             transform: translateX(10px);
         }
 
-        /* Footer */
+        .features-list li i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Footer amélioré */
         footer {
             background: rgba(15, 23, 42, 0.95);
             padding: 3rem 2rem;
@@ -439,14 +558,196 @@
         .social-links a {
             color: var(--light);
             font-size: 1.5rem;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.1);
         }
 
         .social-links a:hover {
             color: var(--primary);
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-5px);
         }
 
-        /* Responsive Styles */
+        /* Timeline pour l'historique */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            padding: 1rem 2rem;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-option {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .quiz-result {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-weight: bold;
+            display: none;
+        }
+
+        .quiz-result.correct {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            display: block;
+        }
+
+        .quiz-result.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            display: block;
+        }
+
+        .quiz-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .quiz-button:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            z-index: 1001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Styles améliorés */
         @media (max-width: 1024px) {
             .breakpoint-badge::before {
                 content: '💻 Tablette';
@@ -458,6 +759,24 @@
 
             .demo-grid {
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 20px;
             }
         }
 
@@ -516,6 +835,11 @@
                 font-size: 0.9rem;
                 padding: 0.8rem 1.2rem;
             }
+
+            .cta-button {
+                display: block;
+                margin: 1rem auto;
+            }
         }
 
         @media (max-width: 480px) {
@@ -534,9 +858,17 @@
             .demo-grid {
                 grid-template-columns: 1fr;
             }
+
+            .code-showcase {
+                padding: 1rem;
+            }
+
+            .code-showcase code {
+                font-size: 0.8rem;
+            }
         }
 
-        /* Scroll Animations */
+        /* Scroll Animations améliorées */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -547,19 +879,109 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Tableaux améliorés */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(99, 102, 241, 0.2);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted var(--primary);
+            cursor: help;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">📱 Media Queries</div>
+            <div class="logo"><i class="fas fa-mobile-alt"></i> Media Queries</div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#demo">Démo Live</a></li>
-                <li><a href="#qrcode">Scanner QR</a></li>
-                <li><a href="#stats">Statistiques</a></li>
-                <li><a href="#code">Exemples</a></li>
+                <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="#histoire"><i class="fas fa-history"></i> Histoire</a></li>
+                <li><a href="#demo"><i class="fas fa-laptop-code"></i> Démo Live</a></li>
+                <li><a href="#qrcode"><i class="fas fa-qrcode"></i> Scanner QR</a></li>
+                <li><a href="#stats"><i class="fas fa-chart-bar"></i> Statistiques</a></li>
+                <li><a href="#code"><i class="fas fa-code"></i> Exemples</a></li>
+                <li><a href="#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
             </ul>
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
@@ -572,16 +994,64 @@
     <!-- Hero Section -->
     <section class="hero" id="accueil">
         <div class="hero-content">
-            <h1>🎨 Les Media Queries</h1>
-            <p>L'art de créer des sites web responsives</p>
-            <a href="#demo" class="cta-button">Voir la magie ✨</a>
-            <div class="hero-authors">Par Seydi & Adel 🚀</div>
+            <h1><i class="fas fa-mobile-alt"></i> Les Media Queries</h1>
+            <p>L'art de créer des sites web responsives et adaptatifs</p>
+            <div>
+                <a href="#demo" class="cta-button">Voir la magie <i class="fas fa-magic"></i></a>
+                <a href="#histoire" class="cta-button secondary">Découvrir l'histoire <i class="fas fa-book"></i></a>
+            </div>
+            <div class="hero-authors">Par Seydi & Adel <i class="fas fa-rocket"></i></div>
+        </div>
+    </section>
+
+    <!-- Histoire Section -->
+    <section id="histoire">
+        <h2 class="section-title"><i class="fas fa-history"></i> Histoire des Media Queries</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">Découvrez l'évolution des Media Queries, de leur création à leur importance actuelle dans le développement web moderne.</p>
+        
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="timeline-year">1994 - CSS1</div>
+                    <p>Première spécification CSS avec support limité pour les médias (screen, print).</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="timeline-year">2001 - CSS3 Draft</div>
+                    <p>Première ébauche des Media Queries dans le module CSS3, permettant des requêtes plus complexes.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="timeline-year">2010 - Standard W3C</div>
+                    <p>Les Media Queries deviennent une recommandation officielle du W3C, ouvrant la voie au responsive design.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="timeline-year">2012 - Mobile First</div>
+                    <p>Popularisation de l'approche "Mobile First" par Luke Wroblewski, changeant la façon de concevoir le web.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="timeline-year">2016 - Container Queries</div>
+                    <p>Premières discussions sur les Container Queries, la prochaine évolution après les Media Queries.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023 - Aujourd'hui</div>
+                    <p>Les Media Queries sont essentielles pour tous les sites web, avec de nouvelles fonctionnalités comme <code>prefers-color-scheme</code> et <code>prefers-reduced-motion</code>.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Stats Section -->
     <section id="stats">
-        <h2 class="section-title">📊 Pourquoi c'est crucial ?</h2>
+        <h2 class="section-title"><i class="fas fa-chart-bar"></i> Pourquoi c'est crucial ?</h2>
         <div class="stats-grid fade-in">
             <div class="stat-card">
                 <div class="stat-number">63%</div>
@@ -596,31 +1066,70 @@
                 <div class="stat-label">Des utilisateurs ne recommandent pas un site mobile mal conçu</div>
             </div>
         </div>
+
+        <div class="fade-in" style="margin-top: 4rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; text-align: center;">Comparaison des approches</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Approche</th>
+                        <th>Avantages</th>
+                        <th>Inconvénients</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mobile First</strong></td>
+                        <td>Performance optimisée, meilleure UX mobile, progressive enhancement</td>
+                        <td>Peut nécessiter plus de code pour les grands écrans</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Desktop First</strong></td>
+                        <td>Familière pour les développeurs, bon pour les applications complexes</td>
+                        <td>Performance mobile réduite, tendance à "masquer" du contenu</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Adaptive Design</strong></td>
+                        <td>Contrôle précis sur chaque breakpoint, expérience optimisée</td>
+                        <td>Plus de maintenance, moins fluide entre les breakpoints</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
     <!-- Live Demo Section -->
     <section id="demo">
-        <h2 class="section-title">✨ Démonstration Interactive</h2>
+        <h2 class="section-title"><i class="fas fa-laptop-code"></i> Démonstration Interactive</h2>
         <div class="live-demo fade-in">
-            <h3 style="color: white; margin-bottom: 2rem;">Redimensionnez votre fenêtre et regardez ! 👇</h3>
+            <h3 style="color: white; margin-bottom: 2rem;">Redimensionnez votre fenêtre et regardez ! <i class="fas fa-arrow-down"></i></h3>
             <div class="device-preview">
-                <div class="device">📱 Mobile<br>1 colonne</div>
-                <div class="device">💻 Tablette<br>2 colonnes</div>
-                <div class="device">🖥️ Desktop<br>3 colonnes</div>
+                <div class="device">
+                    <i class="fas fa-mobile-alt"></i>
+                    📱 Mobile<br>1 colonne
+                </div>
+                <div class="device">
+                    <i class="fas fa-tablet-alt"></i>
+                    💻 Tablette<br>2 colonnes
+                </div>
+                <div class="device">
+                    <i class="fas fa-desktop"></i>
+                    🖥️ Desktop<br>3 colonnes
+                </div>
             </div>
         </div>
 
         <div class="demo-grid fade-in">
             <div class="demo-card">
-                <h3>🎯 Mobile First</h3>
+                <h3><i class="fas fa-mobile-alt"></i> Mobile First</h3>
                 <p>On commence par concevoir pour mobile, puis on adapte pour les écrans plus grands. C'est la meilleure approche en 2025 !</p>
             </div>
             <div class="demo-card">
-                <h3>⚡ Performance</h3>
+                <h3><i class="fas fa-bolt"></i> Performance</h3>
                 <p>Les media queries permettent de charger uniquement les ressources nécessaires pour chaque appareil.</p>
             </div>
             <div class="demo-card">
-                <h3>🎨 UX Optimale</h3>
+                <h3><i class="fas fa-user-check"></i> UX Optimale</h3>
                 <p>Chaque utilisateur voit une interface parfaitement adaptée à son écran.</p>
             </div>
         </div>
@@ -628,7 +1137,7 @@
 
     <!-- QR Code Section -->
     <section class="qr-section" id="qrcode">
-        <h2 style="color: white; font-size: 2.5rem; margin-bottom: 2rem;">📲 Scannez pour tester sur votre mobile !</h2>
+        <h2 style="color: white; font-size: 2.5rem; margin-bottom: 2rem;"><i class="fas fa-qrcode"></i> Scannez pour tester sur votre mobile !</h2>
         <div class="qr-container">
             <svg class="qr-code" viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg">
                 <!-- QR Code simplifié pour la démo -->
@@ -636,34 +1145,34 @@
                 <path d="M0,0 h7v7h-7z M9,0 h2v1h-2z M12,0 h1v1h-1z M14,0 h2v1h-2z M17,0 h2v1h-2z M22,0 h7v7h-7z M1,1 h5v5h-5z M23,1 h5v5h-5z M2,2 h3v3h-3z M24,2 h3v3h-3z M9,2 h1v1h-1z M11,2 h1v1h-1z M13,2 h2v1h-2z M16,2 h3v1h-3z M9,3 h2v1h-2z M12,3 h1v1h-1z M14,3 h1v1h-1z M16,3 h1v1h-1z M18,3 h1v1h-1z M20,3 h1v1h-1z M9,4 h1v1h-1z M11,4 h4v1h-4z M17,4 h1v1h-1z M19,4 h1v1h-1z M9,5 h2v1h-2z M12,5 h1v1h-1z M14,5 h2v1h-2z M17,5 h2v1h-2z M0,8 h1v1h-1z M2,8 h3v1h-3z M6,8 h1v1h-1z M9,8 h1v1h-1z M11,8 h4v1h-4z M16,8 h2v1h-2z M19,8 h1v1h-1z M21,8 h2v1h-2z M24,8 h3v1h-3z M28,8 h1v1h-1z M0,9 h1v1h-1z M3,9 h1v1h-1z M5,9 h2v1h-2z M8,9 h3v1h-3z M13,9 h1v1h-1z M16,9 h1v1h-1z M19,9 h1v1h-1z M21,9 h1v1h-1z M25,9 h1v1h-1z M27,9 h2v1h-2z M1,10 h1v1h-1z M3,10 h2v1h-2z M6,10 h3v1h-3z M10,10 h1v1h-1z M12,10 h2v1h-2z M15,10 h1v1h-1z M17,10 h2v1h-2z M20,10 h3v1h-3z M24,10 h1v1h-1z M26,10 h1v1h-1z M28,10 h1v1h-1z M0,11 h2v1h-2z M3,11 h1v1h-1z M5,11 h3v1h-3z M9,11 h3v1h-3z M13,11 h1v1h-1z M15,11 h1v1h-1z M18,11 h1v1h-1z M20,11 h1v1h-1z M22,11 h2v1h-2z M25,11 h1v1h-1z M27,11 h2v1h-2z M1,12 h1v1h-1z M3,12 h2v1h-2z M6,12 h1v1h-1z M9,12 h2v1h-2z M12,12 h3v1h-3z M16,12 h1v1h-1z M18,12 h3v1h-3z M22,12 h1v1h-1z M25,12 h2v1h-2z M28,12 h1v1h-1z M0,13 h1v1h-1z M2,13 h1v1h-1z M4,13 h1v1h-1z M6,13 h2v1h-2z M9,13 h1v1h-1z M11,13 h1v1h-1z M13,13 h3v1h-3z M17,13 h2v1h-2z M20,13 h2v1h-2z M23,13 h1v1h-1z M25,13 h1v1h-1z M27,13 h2v1h-2z M2,14 h3v1h-3z M6,14 h1v1h-1z M9,14 h2v1h-2z M12,14 h1v1h-1z M15,14 h3v1h-3z M19,14 h2v1h-2z M22,14 h2v1h-2z M25,14 h2v1h-2z M28,14 h1v1h-1z M0,15 h1v1h-1z M2,15 h1v1h-1z M4,15 h2v1h-2z M8,15 h3v1h-3z M12,15 h1v1h-1z M14,15 h2v1h-2z M17,15 h1v1h-1z M19,15 h3v1h-3z M23,15 h1v1h-1z M25,15 h1v1h-1z M27,15 h1v1h-1z M1,16 h2v1h-2z M4,16 h1v1h-1z M6,16 h1v1h-1z M8,16 h1v1h-1z M11,16 h2v1h-2z M14,16 h1v1h-1z M16,16 h1v1h-1z M18,16 h3v1h-3z M22,16 h2v1h-2z M26,16 h1v1h-1z M28,16 h1v1h-1z M9,17 h2v1h-2z M12,17 h1v1h-1z M14,17 h2v1h-2z M17,17 h2v1h-2z M20,17 h3v1h-3z M24,17 h1v1h-1z M26,17 h3v1h-3z M0,18 h2v1h-2z M3,18 h2v1h-2z M6,18 h2v1h-2z M9,18 h1v1h-1z M11,18 h2v1h-2z M14,18 h1v1h-1z M16,18 h2v1h-2z M19,18 h2v1h-2z M22,18 h1v1h-1z M24,18 h1v1h-1z M26,18 h1v1h-1z M28,18 h1v1h-1z M1,19 h1v1h-1z M3,19 h1v1h-1z M7,19 h2v1h-2z M10,19 h2v1h-2z M13,19 h3v1h-3z M17,19 h1v1h-1z M19,19 h4v1h-4z M24,19 h3v1h-3z M28,19 h1v1h-1z M0,20 h1v1h-1z M2,20 h1v1h-1z M4,20 h1v1h-1z M7,20 h1v1h-1z M9,20 h3v1h-3z M13,20 h1v1h-1z M15,20 h1v1h-1z M17,20 h1v1h-1z M19,20 h2v1h-2z M22,20 h2v1h-2z M25,20 h1v1h-1z M27,20 h2v1h-2z M0,21 h7v1h-7z M8,21 h1v1h-1z M10,21 h1v1h-1z M12,21 h2v1h-2z M15,21 h3v1h-3z M19,21 h1v1h-1z M21,21 h2v1h-2z M24,21 h1v1h-1z M26,21 h1v1h-1z M28,21 h1v1h-1z M1,22 h1v1h-1z M3,22 h3v1h-3z M9,22 h3v1h-3z M13,22 h1v1h-1z M16,22 h1v1h-1z M18,22 h2v1h-2z M21,22 h1v1h-1z M23,22 h3v1h-3z M27,22 h2v1h-2z M1,23 h1v1h-1z M3,23 h3v1h-3z M8,23 h1v1h-1z M11,23 h2v1h-2z M14,23 h1v1h-1z M16,23 h1v1h-1z M18,23 h3v1h-3z M22,23 h1v1h-1z M24,23 h2v1h-2z M27,23 h1v1h-1z M1,24 h1v1h-1z M3,24 h3v1h-3z M8,24 h2v1h-2z M11,24 h1v1h-1z M13,24 h3v1h-3z M17,24 h2v1h-2z M20,24 h1v1h-1z M22,24 h1v1h-1z M24,24 h1v1h-1z M26,24 h3v1h-3z M1,25 h1v1h-1z M3,25 h3v1h-3z M8,25 h1v1h-1z M10,25 h2v1h-2z M13,25 h1v1h-1z M15,25 h2v1h-2z M18,25 h1v1h-1z M20,25 h3v1h-3z M24,25 h3v1h-3z M28,25 h1v1h-1z M1,26 h5v1h-5z M8,26 h1v1h-1z M10,26 h1v1h-1z M12,26 h2v1h-2z M15,26 h2v1h-2z M18,26 h1v1h-1z M20,26 h1v1h-1z M23,26 h2v1h-2z M26,26 h1v1h-1z M0,22 h7v7h-7z M22,22 h7v7h-7z M1,23 h5v5h-5z M23,23 h5v5h-5z M2,24 h3v3h-3z M24,24 h3v3h-3z" fill="black"/>
             </svg>
         </div>
-        <p class="qr-text">👆 Scannez ce QR Code avec votre téléphone</p>
-        <p class="qr-subtext">Vous verrez ce site parfaitement adapté à votre écran mobile ! 📱✨</p>
+        <p class="qr-text"><i class="fas fa-hand-point-up"></i> Scannez ce QR Code avec votre téléphone</p>
+        <p class="qr-subtext">Vous verrez ce site parfaitement adapté à votre écran mobile ! <i class="fas fa-mobile-alt"></i><i class="fas fa-magic"></i></p>
     </section>
 
     <!-- Code Examples Section -->
     <section id="code">
-        <h2 class="section-title">💻 Exemples de Code</h2>
+        <h2 class="section-title"><i class="fas fa-code"></i> Exemples de Code</h2>
         
         <div class="fade-in">
-            <h3 style="color: var(--primary); margin-bottom: 1rem;">1️⃣ Syntaxe de Base</h3>
+            <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-code"></i> 1️⃣ Syntaxe de Base</h3>
             <div class="code-showcase">
                 <code>
-/* Mobile First Approach */<br>
-.container {<br>
-&nbsp;&nbsp;width: 100%;<br>
-&nbsp;&nbsp;padding: 15px;<br>
+<span class="comment">/* Mobile First Approach */</span><br>
+<span class="selector">.container</span> {<br>
+&nbsp;&nbsp;<span class="property">width</span>: <span class="value">100%</span>;<br>
+&nbsp;&nbsp;<span class="property">padding</span>: <span class="value">15px</span>;<br>
 }<br><br>
-/* Tablette (768px et plus) */<br>
-@media (min-width: 768px) {<br>
-&nbsp;&nbsp;.container {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;width: 750px;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;padding: 30px;<br>
+<span class="comment">/* Tablette (768px et plus) */</span><br>
+<span class="selector">@media (min-width: 768px)</span> {<br>
+&nbsp;&nbsp;<span class="selector">.container</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">width</span>: <span class="value">750px</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">padding</span>: <span class="value">30px</span>;<br>
 &nbsp;&nbsp;}<br>
 }<br><br>
-/* Desktop (1200px et plus) */<br>
-@media (min-width: 1200px) {<br>
-&nbsp;&nbsp;.container {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;width: 1140px;<br>
+<span class="comment">/* Desktop (1200px et plus) */</span><br>
+<span class="selector">@media (min-width: 1200px)</span> {<br>
+&nbsp;&nbsp;<span class="selector">.container</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">width</span>: <span class="value">1140px</span>;<br>
 &nbsp;&nbsp;}<br>
 }
                 </code>
@@ -671,24 +1180,24 @@
         </div>
 
         <div class="fade-in" style="margin-top: 3rem;">
-            <h3 style="color: var(--primary); margin-bottom: 1rem;">2️⃣ Navigation Responsive</h3>
+            <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-bars"></i> 2️⃣ Navigation Responsive</h3>
             <div class="code-showcase">
                 <code>
-/* Desktop - Menu horizontal */<br>
-.nav-links {<br>
-&nbsp;&nbsp;display: flex;<br>
-&nbsp;&nbsp;gap: 2rem;<br>
+<span class="comment">/* Desktop - Menu horizontal */</span><br>
+<span class="selector">.nav-links</span> {<br>
+&nbsp;&nbsp;<span class="property">display</span>: <span class="value">flex</span>;<br>
+&nbsp;&nbsp;<span class="property">gap</span>: <span class="value">2rem</span>;<br>
 }<br><br>
-/* Mobile - Menu burger */<br>
-@media (max-width: 768px) {<br>
-&nbsp;&nbsp;.nav-links {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;position: fixed;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;flex-direction: column;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;left: -100%;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;transition: left 0.3s;<br>
+<span class="comment">/* Mobile - Menu burger */</span><br>
+<span class="selector">@media (max-width: 768px)</span> {<br>
+&nbsp;&nbsp;<span class="selector">.nav-links</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">position</span>: <span class="value">fixed</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">flex-direction</span>: <span class="value">column</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">left</span>: <span class="value">-100%</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">transition</span>: <span class="value">left 0.3s</span>;<br>
 &nbsp;&nbsp;}<br><br>
-&nbsp;&nbsp;.nav-links.active {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;left: 0;<br>
+&nbsp;&nbsp;<span class="selector">.nav-links.active</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">left</span>: <span class="value">0</span>;<br>
 &nbsp;&nbsp;}<br>
 }
                 </code>
@@ -696,42 +1205,42 @@
         </div>
 
         <div class="fade-in" style="margin-top: 3rem;">
-            <h3 style="color: var(--primary); margin-bottom: 1rem;">3️⃣ Grid Adaptative</h3>
+            <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-th"></i> 3️⃣ Grid Adaptative</h3>
             <div class="code-showcase">
                 <code>
-.grid {<br>
-&nbsp;&nbsp;display: grid;<br>
-&nbsp;&nbsp;gap: 2rem;<br>
+<span class="selector">.grid</span> {<br>
+&nbsp;&nbsp;<span class="property">display</span>: <span class="value">grid</span>;<br>
+&nbsp;&nbsp;<span class="property">gap</span>: <span class="value">2rem</span>;<br>
 }<br><br>
-/* Mobile - 1 colonne */<br>
-@media (min-width: 0px) {<br>
-&nbsp;&nbsp;.grid { grid-template-columns: 1fr; }<br>
+<span class="comment">/* Mobile - 1 colonne */</span><br>
+<span class="selector">@media (min-width: 0px)</span> {<br>
+&nbsp;&nbsp;<span class="selector">.grid</span> { <span class="property">grid-template-columns</span>: <span class="value">1fr</span>; }<br>
 }<br><br>
-/* Tablette - 2 colonnes */<br>
-@media (min-width: 768px) {<br>
-&nbsp;&nbsp;.grid { grid-template-columns: repeat(2, 1fr); }<br>
+<span class="comment">/* Tablette - 2 colonnes */</span><br>
+<span class="selector">@media (min-width: 768px)</span> {<br>
+&nbsp;&nbsp;<span class="selector">.grid</span> { <span class="property">grid-template-columns</span>: <span class="value">repeat(2, 1fr)</span>; }<br>
 }<br><br>
-/* Desktop - 3 colonnes */<br>
-@media (min-width: 1024px) {<br>
-&nbsp;&nbsp;.grid { grid-template-columns: repeat(3, 1fr); }<br>
+<span class="comment">/* Desktop - 3 colonnes */</span><br>
+<span class="selector">@media (min-width: 1024px)</span> {<br>
+&nbsp;&nbsp;<span class="selector">.grid</span> { <span class="property">grid-template-columns</span>: <span class="value">repeat(3, 1fr)</span>; }<br>
 }
                 </code>
             </div>
         </div>
 
         <div class="fade-in" style="margin-top: 3rem;">
-            <h3 style="color: var(--primary); margin-bottom: 1rem;">4️⃣ Dark Mode (Avancé)</h3>
+            <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-moon"></i> 4️⃣ Dark Mode (Avancé)</h3>
             <div class="code-showcase">
                 <code>
-/* Détecte la préférence système */<br>
-@media (prefers-color-scheme: dark) {<br>
-&nbsp;&nbsp;body {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;background: #1a1a1a;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;color: #ffffff;<br>
+<span class="comment">/* Détecte la préférence système */</span><br>
+<span class="selector">@media (prefers-color-scheme: dark)</span> {<br>
+&nbsp;&nbsp;<span class="selector">body</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">background</span>: <span class="value">#1a1a1a</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">color</span>: <span class="value">#ffffff</span>;<br>
 &nbsp;&nbsp;}<br><br>
-&nbsp;&nbsp;.card {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;background: #2d2d2d;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;border-color: #444;<br>
+&nbsp;&nbsp;<span class="selector">.card</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">background</span>: <span class="value">#2d2d2d</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">border-color</span>: <span class="value">#444</span>;<br>
 &nbsp;&nbsp;}<br>
 }
                 </code>
@@ -741,82 +1250,114 @@
 
     <!-- Features Section -->
     <section>
-        <h2 class="section-title">🎯 Points Clés à Retenir</h2>
+        <h2 class="section-title"><i class="fas fa-key"></i> Points Clés à Retenir</h2>
         <ul class="features-list fade-in">
-            <li><strong>📱 Mobile First :</strong> Commencez par concevoir pour mobile, puis adaptez pour les écrans plus grands avec <code>min-width</code></li>
-            <li><strong>🎨 Breakpoints Standards :</strong> 480px (mobile), 768px (tablette), 1024px (laptop), 1440px (desktop)</li>
-            <li><strong>⚡ Performance :</strong> Chargez uniquement les styles nécessaires pour chaque appareil</li>
-            <li><strong>🔍 Test Crucial :</strong> Testez sur de vrais appareils, pas seulement en mode développeur</li>
-            <li><strong>🎭 Dark Mode :</strong> Utilisez <code>prefers-color-scheme</code> pour respecter les préférences utilisateur</li>
-            <li><strong>♿ Accessibilité :</strong> <code>prefers-reduced-motion</code> pour désactiver les animations si nécessaire</li>
-            <li><strong>📐 Unités Relatives :</strong> Utilisez <code>rem</code>, <code>em</code>, <code>%</code> au lieu de pixels fixes</li>
-            <li><strong>🔄 Orientation :</strong> N'oubliez pas <code>orientation: portrait/landscape</code> pour les tablettes</li>
+            <li><i class="fas fa-mobile-alt"></i> <strong>Mobile First :</strong> Commencez par concevoir pour mobile, puis adaptez pour les écrans plus grands avec <code>min-width</code></li>
+            <li><i class="fas fa-ruler-combined"></i> <strong>Breakpoints Standards :</strong> 480px (mobile), 768px (tablette), 1024px (laptop), 1440px (desktop)</li>
+            <li><i class="fas fa-bolt"></i> <strong>Performance :</strong> Chargez uniquement les styles nécessaires pour chaque appareil</li>
+            <li><i class="fas fa-vial"></i> <strong>Test Crucial :</strong> Testez sur de vrais appareils, pas seulement en mode développeur</li>
+            <li><i class="fas fa-moon"></i> <strong>Dark Mode :</strong> Utilisez <code>prefers-color-scheme</code> pour respecter les préférences utilisateur</li>
+            <li><i class="fas fa-universal-access"></i> <strong>Accessibilité :</strong> <code>prefers-reduced-motion</code> pour désactiver les animations si nécessaire</li>
+            <li><i class="fas fa-ruler"></i> <strong>Unités Relatives :</strong> Utilisez <code>rem</code>, <code>em</code>, <code>%</code> au lieu de pixels fixes</li>
+            <li><i class="fas fa-sync-alt"></i> <strong>Orientation :</strong> N'oubliez pas <code>orientation: portrait/landscape</code> pour les tablettes</li>
         </ul>
     </section>
 
     <!-- Best Practices Section -->
     <section>
-        <h2 class="section-title">✅ Best Practices</h2>
+        <h2 class="section-title"><i class="fas fa-check-circle"></i> Best Practices</h2>
         <div class="demo-grid fade-in">
             <div class="demo-card">
-                <h3>✅ À FAIRE</h3>
+                <h3><i class="fas fa-check"></i> À FAIRE</h3>
                 <ul style="list-style: none; padding: 0;">
-                    <li>✓ Mobile First approach</li>
-                    <li>✓ Tester sur vrais devices</li>
-                    <li>✓ Utiliser des unités relatives</li>
-                    <li>✓ 3-5 breakpoints max</li>
-                    <li>✓ Meta viewport tag</li>
+                    <li><i class="fas fa-check" style="color: var(--success);"></i> Mobile First approach</li>
+                    <li><i class="fas fa-check" style="color: var(--success);"></i> Tester sur vrais devices</li>
+                    <li><i class="fas fa-check" style="color: var(--success);"></i> Utiliser des unités relatives</li>
+                    <li><i class="fas fa-check" style="color: var(--success);"></i> 3-5 breakpoints max</li>
+                    <li><i class="fas fa-check" style="color: var(--success);"></i> Meta viewport tag</li>
                 </ul>
             </div>
             <div class="demo-card">
-                <h3>❌ À ÉVITER</h3>
+                <h3><i class="fas fa-times"></i> À ÉVITER</h3>
                 <ul style="list-style: none; padding: 0;">
-                    <li>✗ Trop de breakpoints</li>
-                    <li>✗ Pixels fixes partout</li>
-                    <li>✗ Oublier le viewport</li>
-                    <li>✗ Desktop First (2025)</li>
-                    <li>✗ Ne pas tester mobile</li>
+                    <li><i class="fas fa-times" style="color: var(--danger);"></i> Trop de breakpoints</li>
+                    <li><i class="fas fa-times" style="color: var(--danger);"></i> Pixels fixes partout</li>
+                    <li><i class="fas fa-times" style="color: var(--danger);"></i> Oublier le viewport</li>
+                    <li><i class="fas fa-times" style="color: var(--danger);"></i> Desktop First (2025)</li>
+                    <li><i class="fas fa-times" style="color: var(--danger);"></i> Ne pas tester mobile</li>
                 </ul>
             </div>
             <div class="demo-card">
-                <h3>🔥 PRO TIPS</h3>
+                <h3><i class="fas fa-lightbulb"></i> PRO TIPS</h3>
                 <ul style="list-style: none; padding: 0;">
-                    <li>🎯 Container queries (2025)</li>
-                    <li>⚡ Lighthouse testing</li>
-                    <li>🎨 Figma responsive</li>
-                    <li>📊 Analytics mobile</li>
-                    <li>🚀 Progressive Enhancement</li>
+                    <li><i class="fas fa-rocket" style="color: var(--primary);"></i> Container queries (2025)</li>
+                    <li><i class="fas fa-tachometer-alt" style="color: var(--primary);"></i> Lighthouse testing</li>
+                    <li><i class="fas fa-palette" style="color: var(--primary);"></i> Figma responsive</li>
+                    <li><i class="fas fa-chart-line" style="color: var(--primary);"></i> Analytics mobile</li>
+                    <li><i class="fas fa-layer-group" style="color: var(--primary);"></i> Progressive Enhancement</li>
                 </ul>
             </div>
         </div>
     </section>
 
+    <!-- Quiz Section -->
+    <section id="quiz">
+        <h2 class="section-title"><i class="fas fa-question-circle"></i> Quiz Interactif</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">Testez vos connaissances sur les Media Queries !</p>
+        
+        <div class="quiz-container fade-in">
+            <div class="quiz-question" id="question1">
+                1. Quelle est la meilleure approche pour le responsive design en 2025 ?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" data-correct="true">Mobile First</div>
+                <div class="quiz-option" data-correct="false">Desktop First</div>
+                <div class="quiz-option" data-correct="false">Adaptive Design uniquement</div>
+                <div class="quiz-option" data-correct="false">Pas de différence</div>
+            </div>
+            <div class="quiz-result" id="result1"></div>
+            
+            <div class="quiz-question" id="question2" style="margin-top: 2rem;">
+                2. Quel breakpoint est généralement utilisé pour les tablettes ?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" data-correct="false">480px</div>
+                <div class="quiz-option" data-correct="true">768px</div>
+                <div class="quiz-option" data-correct="false">1024px</div>
+                <div class="quiz-option" data-correct="false">1200px</div>
+            </div>
+            <div class="quiz-result" id="result2"></div>
+            
+            <button class="quiz-button" id="checkAnswers">Vérifier mes réponses</button>
+        </div>
+    </section>
+
     <!-- Real World Examples -->
     <section>
-        <h2 class="section-title">🌍 Exemples du Monde Réel</h2>
+        <h2 class="section-title"><i class="fas fa-globe"></i> Exemples du Monde Réel</h2>
         <div class="demo-grid fade-in">
             <div class="demo-card">
-                <h3>🎬 Netflix</h3>
+                <h3><i class="fas fa-film"></i> Netflix</h3>
                 <p>6 colonnes sur desktop → 2 sur mobile. Grid responsive parfait pour leur catalogue de films.</p>
             </div>
             <div class="demo-card">
-                <h3>🛍️ Amazon</h3>
+                <h3><i class="fas fa-shopping-cart"></i> Amazon</h3>
                 <p>Navigation complète sur desktop, menu burger sur mobile. Plus de 70% de leurs ventes viennent du mobile !</p>
             </div>
             <div class="demo-card">
-                <h3>📱 Instagram</h3>
+                <h3><i class="fab fa-instagram"></i> Instagram</h3>
                 <p>Colonnes multiples sur desktop, scroll vertical sur mobile. Adaptation totale de l'UX selon l'appareil.</p>
             </div>
             <div class="demo-card">
-                <h3>📰 Medium</h3>
+                <h3><i class="fab fa-medium"></i> Medium</h3>
                 <p>Largeur de texte adaptée : 700px sur desktop, 100% sur mobile pour une lecture optimale.</p>
             </div>
             <div class="demo-card">
-                <h3>🎵 Spotify</h3>
+                <h3><i class="fab fa-spotify"></i> Spotify</h3>
                 <p>Player fixe en bas sur desktop, interface simplifiée sur mobile avec gestes tactiles.</p>
             </div>
             <div class="demo-card">
-                <h3>💼 LinkedIn</h3>
+                <h3><i class="fab fa-linkedin"></i> LinkedIn</h3>
                 <p>3 colonnes desktop → 1 colonne mobile. Cards empilées pour une navigation fluide.</p>
             </div>
         </div>
@@ -824,30 +1365,30 @@
 
     <!-- Tools Section -->
     <section>
-        <h2 class="section-title">🛠️ Outils de Développement</h2>
+        <h2 class="section-title"><i class="fas fa-tools"></i> Outils de Développement</h2>
         <div class="demo-grid fade-in">
             <div class="demo-card">
-                <h3>🔍 DevTools</h3>
+                <h3><i class="fas fa-search"></i> DevTools</h3>
                 <p><strong>Chrome DevTools</strong><br>F12 → Toggle Device Mode (Ctrl+Shift+M)<br>Simulez différents appareils</p>
             </div>
             <div class="demo-card">
-                <h3>🎨 Figma</h3>
+                <h3><i class="fas fa-palette"></i> Figma</h3>
                 <p><strong>Design Responsive</strong><br>Auto Layout, Constraints<br>Prototypes multi-devices</p>
             </div>
             <div class="demo-card">
-                <h3>📱 BrowserStack</h3>
+                <h3><i class="fas fa-mobile-alt"></i> BrowserStack</h3>
                 <p><strong>Tests Réels</strong><br>Testez sur +3000 devices<br>iOS, Android, Desktop</p>
             </div>
             <div class="demo-card">
-                <h3>⚡ Lighthouse</h3>
+                <h3><i class="fas fa-tachometer-alt"></i> Lighthouse</h3>
                 <p><strong>Performance Audit</strong><br>Score mobile/desktop<br>Recommandations SEO</p>
             </div>
             <div class="demo-card">
-                <h3>🎯 Responsinator</h3>
+                <h3><i class="fas fa-eye"></i> Responsinator</h3>
                 <p><strong>Preview Rapide</strong><br>Visualisation multi-devices<br>iPhone, iPad, Android</p>
             </div>
             <div class="demo-card">
-                <h3>🚀 VS Code Extensions</h3>
+                <h3><i class="fas fa-code"></i> VS Code Extensions</h3>
                 <p><strong>Live Server</strong><br>Hot Reload automatique<br>Test en temps réel</p>
             </div>
         </div>
@@ -855,7 +1396,7 @@
 
     <!-- Challenge Section -->
     <section style="background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 5rem 2rem; border-radius: 30px; text-align: center;">
-        <h2 style="color: white; font-size: 2.5rem; margin-bottom: 2rem;">🏆 Challenge pour Vous !</h2>
+        <h2 style="color: white; font-size: 2.5rem; margin-bottom: 2rem;"><i class="fas fa-trophy"></i> Challenge pour Vous !</h2>
         <p style="color: white; font-size: 1.3rem; margin-bottom: 2rem;">
             Créez un site responsive SANS framework CSS<br>
             (pas de Bootstrap, pas de Tailwind - juste HTML/CSS pur)
@@ -863,31 +1404,31 @@
         <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 15px; max-width: 800px; margin: 2rem auto; backdrop-filter: blur(10px);">
             <p style="color: white; font-size: 1.1rem; line-height: 1.8;">
                 <strong>Objectifs :</strong><br>
-                ✅ Navigation responsive (burger menu sur mobile)<br>
-                ✅ Grid adaptatif (3 colonnes → 2 → 1)<br>
-                ✅ Images responsives<br>
-                ✅ Dark mode avec prefers-color-scheme<br>
-                ✅ Animations fluides
+                <i class="fas fa-check" style="color: var(--success);"></i> Navigation responsive (burger menu sur mobile)<br>
+                <i class="fas fa-check" style="color: var(--success);"></i> Grid adaptatif (3 colonnes → 2 → 1)<br>
+                <i class="fas fa-check" style="color: var(--success);"></i> Images responsives<br>
+                <i class="fas fa-check" style="color: var(--success);"></i> Dark mode avec prefers-color-scheme<br>
+                <i class="fas fa-check" style="color: var(--success);"></i> Animations fluides
             </p>
         </div>
         <p style="color: white; font-size: 1.2rem; margin-top: 2rem; font-weight: bold;">
-            🎯 Vous avez 1 semaine ! Montrez-nous ce que vous savez faire ! 💪
+            <i class="fas fa-bullseye"></i> Vous avez 1 semaine ! Montrez-nous ce que vous savez faire ! <i class="fas fa-fist-raised"></i>
         </p>
     </section>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <h3 style="color: var(--primary); margin-bottom: 1rem;">Merci pour votre attention ! 🚀</h3>
-            <p style="margin-bottom: 1rem;">Une présentation réalisée avec ❤️ par Seydi & Adel</p>
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Merci pour votre attention ! <i class="fas fa-rocket"></i></h3>
+            <p style="margin-bottom: 1rem;">Une présentation réalisée avec <i class="fas fa-heart" style="color: var(--accent);"></i> par Seydi & Adel</p>
             <p style="color: #64748b; font-size: 0.9rem;">École d'Ingénieurs Informatique - 1ère Année - 2025</p>
             <div class="social-links">
-                <a href="#" title="Questions?">💬</a>
-                <a href="#" title="GitHub">💻</a>
-                <a href="#" title="Email">📧</a>
+                <a href="#" title="Questions?"><i class="fas fa-comments"></i></a>
+                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
             </div>
             <p style="margin-top: 2rem; color: #64748b; font-size: 0.85rem;">
-                Ce site lui-même est 100% responsive ! Testez-le sur votre mobile 📱
+                Ce site lui-même est 100% responsive ! Testez-le sur votre mobile <i class="fas fa-mobile-alt"></i>
             </p>
         </div>
     </footer>
@@ -949,7 +1490,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in').forEach(el => {
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
             observer.observe(el);
         });
 
@@ -965,11 +1506,94 @@
             }
         });
 
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
         // Effet parallaxe léger sur le hero
         window.addEventListener('scroll', () => {
             const hero = document.querySelector('.hero');
             const scrolled = window.pageYOffset;
             hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Quiz interactif
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Retirer la sélection précédente dans le même groupe
+                const parent = this.parentElement;
+                parent.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Sélectionner l'option actuelle
+                this.classList.add('selected');
+            });
+        });
+
+        document.getElementById('checkAnswers').addEventListener('click', function() {
+            let score = 0;
+            const totalQuestions = 2;
+            
+            // Vérifier la première question
+            const question1Options = document.querySelectorAll('#question1 + .quiz-options .quiz-option');
+            question1Options.forEach(option => {
+                if (option.classList.contains('selected')) {
+                    if (option.getAttribute('data-correct') === 'true') {
+                        option.classList.add('correct');
+                        score++;
+                    } else {
+                        option.classList.add('incorrect');
+                    }
+                }
+            });
+            
+            // Vérifier la deuxième question
+            const question2Options = document.querySelectorAll('#question2 + .quiz-options .quiz-option');
+            question2Options.forEach(option => {
+                if (option.classList.contains('selected')) {
+                    if (option.getAttribute('data-correct') === 'true') {
+                        option.classList.add('correct');
+                        score++;
+                    } else {
+                        option.classList.add('incorrect');
+                    }
+                }
+            });
+            
+            // Afficher le résultat
+            const result = document.createElement('div');
+            result.className = 'quiz-result';
+            result.style.marginTop = '2rem';
+            result.style.fontSize = '1.2rem';
+            
+            if (score === totalQuestions) {
+                result.innerHTML = `<i class="fas fa-trophy" style="color: var(--success);"></i> Félicitations ! Vous avez ${score}/${totalQuestions} bonnes réponses !`;
+                result.style.background = 'rgba(16, 185, 129, 0.2)';
+                result.style.color = 'var(--success)';
+            } else {
+                result.innerHTML = `<i class="fas fa-redo" style="color: var(--warning);"></i> Vous avez ${score}/${totalQuestions} bonnes réponses. Essayez encore !`;
+                result.style.background = 'rgba(245, 158, 11, 0.2)';
+                result.style.color = 'var(--warning)';
+            }
+            
+            // Ajouter le résultat au quiz
+            const quizContainer = document.querySelector('.quiz-container');
+            const existingResult = quizContainer.querySelector('.final-result');
+            if (existingResult) {
+                existingResult.remove();
+            }
+            result.classList.add('final-result');
+            quizContainer.appendChild(result);
+            
+            // Désactiver le bouton après utilisation
+            this.disabled = true;
+            this.textContent = 'Quiz terminé';
+            this.style.background = '#64748b';
         });
 
         // Easter egg: Konami code
