@@ -148,139 +148,57 @@
             padding-left: 0.8rem;
         }
 
-        /* Éléments Interactifs */
-        .interactive-demo {
+        .content-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .content-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .content-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .qr-code-container {
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 15px;
             box-shadow: var(--shadow);
-            margin: 1.5rem 0;
+            display: inline-block;
+            margin: 1rem 0;
             border: 2px solid var(--accent);
         }
 
-        .demo-controls {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            display: block;
         }
 
-        .demo-btn {
-            padding: 0.8rem 1.5rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .demo-btn:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .demo-btn.active {
-            background: var(--accent);
-            box-shadow: 0 4px 12px rgba(57, 73, 171, 0.4);
-        }
-
-        .demo-preview {
-            background: var(--light);
-            padding: 2rem;
-            border-radius: 10px;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .preview-content {
+        .qr-text {
             text-align: center;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .quiz-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            margin: 1.5rem 0;
-        }
-
-        .quiz-question {
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            margin-top: 0.8rem;
             color: var(--primary);
             font-weight: 600;
         }
 
-        .quiz-options {
-            display: grid;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+        .floating-icon {
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.1;
+            color: var(--primary);
+            z-index: 0;
         }
 
-        .quiz-option {
-            padding: 1.2rem;
-            background: var(--light);
-            border: 2px solid transparent;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
+        .floating-icon-1 { top: -10px; left: -10px; }
+        .floating-icon-2 { bottom: -10px; right: -10px; }
 
-        .quiz-option:hover {
-            border-color: var(--primary);
-            transform: translateX(5px);
-        }
-
-        .quiz-option.selected {
-            border-color: var(--accent);
-            background: rgba(57, 73, 171, 0.1);
-        }
-
-        .quiz-option.correct {
-            border-color: var(--success);
-            background: rgba(46, 125, 50, 0.1);
-        }
-
-        .quiz-option.incorrect {
-            border-color: var(--danger);
-            background: rgba(198, 40, 40, 0.1);
-        }
-
-        .quiz-result {
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 600;
-            display: none;
-        }
-
-        .quiz-result.show {
-            display: block;
-        }
-
-        .quiz-result.correct {
-            background: rgba(46, 125, 50, 0.1);
-            color: var(--success);
-            border: 2px solid var(--success);
-        }
-
-        .quiz-result.incorrect {
-            background: rgba(198, 40, 40, 0.1);
-            color: var(--danger);
-            border: 2px solid var(--danger);
-        }
-
-        /* Autres styles existants... */
         .code-block {
             background: var(--code-bg);
             color: var(--light);
@@ -298,11 +216,115 @@
             overflow-y: auto;
         }
 
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 25px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-property {
+            color: #9cdcfe;
+        }
+
+        .code-value {
+            color: #ce9178;
+        }
+
+        .code-selector {
+            color: #d7ba7d;
+        }
+
+        .code-function {
+            color: #dcdcaa;
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
             margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--secondary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid #e0e0e0;
+            transition: background 0.3s ease;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        .comparison-table tr:hover {
+            background: #e8eaf6;
         }
 
         .features-list {
@@ -322,6 +344,73 @@
             gap: 1rem;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .features-list li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .features-list li i {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        .demo-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+        }
+
+        .demo-devices {
+            display: flex;
+            justify-content: space-around;
+            margin: 1.5rem 0;
+            gap: 1.5rem;
+        }
+
+        .demo-device {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            flex: 1;
+            border: 2px solid transparent;
+        }
+
+        .demo-device:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .demo-device i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-device p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .demo-device .device-desc {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 0.5rem;
         }
 
         .slide-footer {
@@ -360,7 +449,28 @@
             border-radius: 15px;
         }
 
-        /* Animations */
+        .authors {
+            margin-top: 2rem;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .university {
+            color: #666;
+            font-size: 1.1rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Animations avancées */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -372,10 +482,53 @@
             }
         }
 
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         .fade-in-up {
             animation: fadeInUp 0.6s ease forwards;
         }
 
+        .slide-in-left {
+            animation: slideInLeft 0.6s ease forwards;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.6s ease forwards;
+        }
+
+        .stagger-animation > * {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+        .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+        .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+        .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+        .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+        .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Progress bar */
         .progress-bar {
             position: fixed;
             top: 0;
@@ -387,6 +540,7 @@
             z-index: 1000;
         }
 
+        /* Navigation dots */
         .navigation-dots {
             position: fixed;
             right: 1rem;
@@ -414,22 +568,146 @@
             box-shadow: 0 0 8px rgba(255,255,255,0.8);
         }
 
+        .dot:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        /* QR Code Animation */
+        @keyframes qrPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .qr-pulse {
+            animation: qrPulse 2s ease-in-out infinite;
+        }
+
+        /* Scrollbar personnalisée */
+        .slide::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .slide::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .slide::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
         /* Responsive */
+        @media (max-width: 1200px) {
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            .content-text {
+                font-size: 1.2rem;
+            }
+            
+            .code-block {
+                font-size: 1rem;
+            }
+            
+            .qr-code {
+                width: 180px;
+                height: 180px;
+            }
+        }
+
         @media (max-width: 768px) {
+            .slide {
+                padding: 1.5rem;
+            }
+            
+            .slide-title {
+                font-size: 2rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.2rem;
+            }
+            
             .content-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-            .demo-controls {
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .demo-devices {
                 flex-direction: column;
+                gap: 1rem;
             }
-            .demo-btn {
-                min-width: auto;
+            
+            .navigation-dots {
+                display: none;
             }
+            
+            .qr-code {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .code-block {
+                font-size: 0.9rem;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .slide {
+                padding: 1rem;
+            }
+            
+            .slide-title {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .slide-header {
+                margin-bottom: 1rem;
+            }
+            
+            .content-text {
+                font-size: 1.1rem;
+            }
+            
+            .stats-grid {
+                margin: 1rem 0;
+            }
+        }
+
+        /* Mode présentation */
+        .presentation-mode .navigation-help,
+        .presentation-mode .slide-number {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .presentation-mode:hover .navigation-help,
+        .presentation-mode:hover .slide-number {
+            opacity: 1;
         }
     </style>
 </head>
 <body class="presentation-mode">
     <div class="progress-bar" id="progressBar"></div>
+    
     <div class="navigation-dots" id="navigationDots"></div>
 
     <div class="slides-container">
@@ -443,29 +721,16 @@
             <div class="slide-content">
                 <div class="content-grid">
                     <div class="content-text fade-in-up">
-                        <p>Présentation académique interactive sur les Media Queries CSS et leur rôle fondamental dans le développement web moderne.</p>
-                        <div style="margin-top: 2rem;">
-                            <p><strong>Objectifs d'apprentissage :</strong></p>
-                            <ul style="margin-left: 1.5rem; margin-top: 1rem;">
-                                <li>Comprendre la syntaxe des Media Queries</li>
-                                <li>Maîtriser les breakpoints standards</li>
-                                <li>Implémenter l'approche Mobile First</li>
-                                <li>Utiliser les fonctionnalités avancées</li>
-                            </ul>
+                        <p>Présentation académique approfondie sur les Media Queries CSS et leur rôle fondamental dans le développement web moderne.</p>
+                        <div class="authors">
+                            <p class="author-name">Seydi & Adel</p>
+                            <p class="university">École d'Ingénieurs Informatique - 1ère Année</p>
                         </div>
                     </div>
-                    <div class="content-text fade-in-up">
-                        <div class="interactive-demo">
-                            <h3>🎯 Test Immédiat</h3>
-                            <p>Redimensionnez cette fenêtre et observez comment la présentation s'adapte !</p>
-                            <div class="demo-preview">
-                                <div class="preview-content">
-                                    <i class="fas fa-desktop" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
-                                    <div id="currentViewport">Largeur actuelle : <span id="viewportSize">0px</span></div>
-                                    <div id="currentBreakpoint" style="margin-top: 0.5rem; font-weight: normal;"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="content-image">
+                        <i class="fas fa-laptop-code floating-icon floating-icon-1"></i>
+                        <i class="fas fa-mobile-alt floating-icon floating-icon-2"></i>
+                        <i class="fas fa-code" style="font-size: 12rem; color: var(--accent); opacity: 0.8;"></i>
                     </div>
                 </div>
             </div>
@@ -476,53 +741,33 @@
                 <i class="fas fa-arrows-alt-h"></i>
                 <span>Flèches pour naviguer</span>
             </div>
-            <div class="slide-number">1/9</div>
+            <div class="slide-number">1/10</div>
         </div>
 
-        <!-- Slide 2: Démo Interactive Breakpoints -->
+        <!-- Slide 2: Introduction -->
         <div class="slide" id="slide2">
             <div class="slide-header">
-                <h1 class="slide-title">Démonstration Interactive</h1>
-                <p class="slide-subtitle">Expérimentez avec les breakpoints</p>
+                <h1 class="slide-title">Introduction aux Media Queries</h1>
+                <p class="slide-subtitle">Définition et principe fondamental</p>
                 <div class="slide-decoration"></div>
             </div>
             <div class="slide-content">
                 <div class="content-grid">
-                    <div class="content-text">
-                        <h3>📱 Comprendre les Breakpoints</h3>
-                        <p>Les breakpoints sont des points de rupture où le design change pour s'adapter à différentes tailles d'écran.</p>
-                        
-                        <div class="interactive-demo">
-                            <h4>Simulateur de Device</h4>
-                            <div class="demo-controls">
-                                <button class="demo-btn" data-width="375">📱 Mobile (375px)</button>
-                                <button class="demo-btn" data-width="768">💻 Tablette (768px)</button>
-                                <button class="demo-btn" data-width="1024">🖥️ Desktop (1024px)</button>
-                                <button class="demo-btn" data-width="1440">🖥️ Large (1440px)</button>
-                            </div>
-                            <div class="demo-preview" id="devicePreview">
-                                <div class="preview-content">
-                                    <div id="deviceInfo">
-                                        <i class="fas fa-mobile-alt" style="font-size: 2rem;"></i>
-                                        <p style="margin-top: 1rem;">Sélectionnez un device pour voir le rendu</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="content-text slide-in-left">
+                        <h3>Qu'est-ce qu'une Media Query ?</h3>
+                        <p>Une <strong>Media Query</strong> est une fonctionnalité CSS3 permettant d'appliquer des styles conditionnels basés sur les caractéristiques du dispositif d'affichage.</p>
+                        <p>Elle permet de créer des designs <strong>responsifs</strong> qui s'adaptent automatiquement à différentes tailles d'écran, résolutions et capacités des appareils.</p>
                     </div>
-                    <div class="content-text">
-                        <h3>🎯 Breakpoints Recommandés</h3>
+                    <div class="content-text slide-in-right">
+                        <h3>Syntaxe fondamentale</h3>
                         <div class="code-block">
-                            <span class="code-comment">/* Mobile First Approach */</span><br>
-                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">576px</span>) { <span class="code-comment">/* Small devices */</span> }<br>
-                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">768px</span>) { <span class="code-comment">/* Medium devices */</span> }<br>
-                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">992px</span>) { <span class="code-comment">/* Large devices */</span> }<br>
-                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">1200px</span>) { <span class="code-comment">/* X-Large devices */</span> }<br>
-                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">1400px</span>) { <span class="code-comment">/* XX-Large devices */</span> }
-                        </div>
-                        
-                        <div style="margin-top: 1.5rem;">
-                            <p><strong>💡 Bonne pratique :</strong> Utilisez des breakpoints basés sur le contenu plutôt que des devices spécifiques.</p>
+                            <span class="code-comment">/* Structure de base d'une Media Query */</span><br>
+                            <span class="code-selector">@media</span> <span class="code-function">[type de média]</span> <span class="code-selector">and</span> (<span class="code-property">condition</span>) {<br>
+                            &nbsp;&nbsp;<span class="code-comment">/* Styles CSS appliqués conditionnellement */</span><br>
+                            &nbsp;&nbsp;<span class="code-selector">.element-cible</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">propriété-css</span>: <span class="code-value">valeur</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }
                         </div>
                     </div>
                 </div>
@@ -531,138 +776,82 @@
                 <i class="fas fa-arrows-alt-h"></i>
                 <span>Flèches pour naviguer</span>
             </div>
-            <div class="slide-number">2/9</div>
+            <div class="slide-number">2/10</div>
         </div>
 
-        <!-- Slide 3: Quiz Interactif -->
+        <!-- Slide 3: Importance statistique -->
         <div class="slide" id="slide3">
             <div class="slide-header">
-                <h1 class="slide-title">Quiz Interactif</h1>
-                <p class="slide-subtitle">Testez vos connaissances</p>
+                <h1 class="slide-title">L'impératif du Responsive Design</h1>
+                <p class="slide-subtitle">Pourquoi les Media Queries sont essentielles en 2025</p>
                 <div class="slide-decoration"></div>
             </div>
             <div class="slide-content">
-                <div class="content-grid">
-                    <div class="content-text">
-                        <h3>❓ Question 1 : Syntaxe</h3>
-                        <div class="quiz-container">
-                            <div class="quiz-question">Quelle est la syntaxe correcte pour une Media Query qui cible les écrans de plus de 768px ?</div>
-                            <div class="quiz-options">
-                                <div class="quiz-option" data-correct="false">@media screen and (width > 768px)</div>
-                                <div class="quiz-option" data-correct="true">@media (min-width: 768px)</div>
-                                <div class="quiz-option" data-correct="false">@media (max-width: 768px)</div>
-                                <div class="quiz-option" data-correct="false">@media screen (width >= 768px)</div>
-                            </div>
-                            <div class="quiz-result" id="quiz1Result"></div>
-                            <button class="demo-btn" onclick="checkQuiz(1)" style="margin-top: 1rem;">Vérifier la réponse</button>
-                        </div>
-
-                        <h3 style="margin-top: 2rem;">❓ Question 2 : Mobile First</h3>
-                        <div class="quiz-container">
-                            <div class="quiz-question">Quelle approche est recommandée pour le responsive design moderne ?</div>
-                            <div class="quiz-options">
-                                <div class="quiz-option" data-correct="false">Desktop First</div>
-                                <div class="quiz-option" data-correct="true">Mobile First</div>
-                                <div class="quiz-option" data-correct="false">Adaptive Design</div>
-                                <div class="quiz-option" data-correct="false">Graceful Degradation</div>
-                            </div>
-                            <div class="quiz-result" id="quiz2Result"></div>
-                            <button class="demo-btn" onclick="checkQuiz(2)" style="margin-top: 1rem;">Vérifier la réponse</button>
-                        </div>
+                <div class="stats-grid stagger-animation">
+                    <div class="stat-card">
+                        <div class="stat-number">74%</div>
+                        <div class="stat-label">Des utilisateurs consultent des sites web principalement sur mobile</div>
                     </div>
-                    <div class="content-text">
-                        <h3>📊 Votre Progression</h3>
-                        <div class="interactive-demo">
-                            <div id="quizProgress" style="text-align: center;">
-                                <div style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;">
-                                    <i class="fas fa-trophy"></i>
-                                </div>
-                                <p>Répondez aux questions pour débloquer votre score !</p>
-                                <div style="margin-top: 1.5rem;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span>Question 1</span>
-                                        <span id="q1Status">🔒</span>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <span>Question 2</span>
-                                        <span id="q2Status">🔒</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="margin-top: 2rem;">
-                            <h4>🎯 Explication des Concepts</h4>
-                            <ul style="margin-left: 1rem; margin-top: 1rem;">
-                                <li><strong>Mobile First</strong>: Commencer par les styles mobiles, puis améliorer pour les grands écrans</li>
-                                <li><strong>min-width</strong>: Styles appliqués quand la largeur est AU MOINS cette valeur</li>
-                                <li><strong>max-width</strong>: Styles appliqués quand la largeur est AU PLUS cette valeur</li>
-                            </ul>
-                        </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12K+</div>
+                        <div class="stat-label">Modèles d'appareils différents sur le marché</div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-number">61%</div>
+                        <div class="stat-label">Des utilisateurs quittent un site non-optimisé mobile</div>
+                    </div>
+                </div>
+                
+                <div class="content-text fade-in-up">
+                    <h3>Impact sur l'expérience utilisateur</h3>
+                    <ul class="features-list">
+                        <li><i class="fas fa-chart-line"></i> <strong>Amélioration du taux de conversion</strong> - +20% en moyenne</li>
+                        <li><i class="fas fa-search"></i> <strong>Meilleur référencement SEO</strong> - Facteur clé Google</li>
+                        <li><i class="fas fa-users"></i> <strong>Accessibilité universelle</strong> - Tous appareils confondus</li>
+                        <li><i class="fas fa-tachometer-alt"></i> <strong>Performance optimisée</strong> - Chargement adaptatif</li>
+                    </ul>
                 </div>
             </div>
             <div class="navigation-help">
                 <i class="fas fa-arrows-alt-h"></i>
                 <span>Flèches pour naviguer</span>
             </div>
-            <div class="slide-number">3/9</div>
+            <div class="slide-number">3/10</div>
         </div>
 
-        <!-- Slide 4: Démo Code Live -->
+        <!-- Slide 4: Syntaxe détaillée -->
         <div class="slide" id="slide4">
             <div class="slide-header">
-                <h1 class="slide-title">Démonstration de Code</h1>
-                <p class="slide-subtitle">Expérimentez avec le code en direct</p>
+                <h1 class="slide-title">Syntaxe des Media Queries</h1>
+                <p class="slide-subtitle">Types de conditions et opérateurs logiques</p>
                 <div class="slide-decoration"></div>
             </div>
             <div class="slide-content">
                 <div class="content-grid">
-                    <div class="content-text">
-                        <h3>🛠️ Éditeur de Code Interactif</h3>
-                        <p>Modifiez le code CSS et voyez le résultat en temps réel :</p>
-                        
-                        <div class="interactive-demo">
-                            <div class="demo-controls">
-                                <button class="demo-btn active" data-preset="mobile">Mobile First</button>
-                                <button class="demo-btn" data-preset="grid">Grid Responsive</button>
-                                <button class="demo-btn" data-preset="navigation">Navigation</button>
-                            </div>
+                    <div class="content-text slide-in-left">
+                        <h3>Types de Media Queries</h3>
+                        <ul class="features-list">
+                            <li><i class="fas fa-desktop"></i> <strong>Basées sur la largeur</strong> - min-width, max-width</li>
+                            <li><i class="fas fa-arrows-alt-v"></i> <strong>Basées sur la hauteur</strong> - min-height, max-height</li>
+                            <li><i class="fas fa-sync-alt"></i> <strong>Basées sur l'orientation</strong> - portrait, landscape</li>
+                            <li><i class="fas fa-tachometer-alt"></i> <strong>Basées sur la résolution</strong> - min-resolution</li>
+                            <li><i class="fas fa-palette"></i> <strong>Basées sur les préférences</strong> - prefers-color-scheme</li>
+                        </ul>
+                    </div>
+                    <div class="content-text slide-in-right">
+                        <h3>Exemples pratiques</h3>
+                        <div class="code-block">
+                            <span class="code-comment">/* Mobile First */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">768px</span>) { ... }<br><br>
                             
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
-                                <div>
-                                    <h4>Code CSS :</h4>
-                                    <div class="code-block" id="liveCode" style="height: 300px; overflow-y: auto;">
-                                        <span class="code-comment">/* Styles de base pour mobile */</span><br>
-                                        <span class="code-selector">.container</span> {<br>
-                                        &nbsp;&nbsp;<span class="code-property">padding</span>: <span class="code-value">1rem</span>;<br>
-                                        &nbsp;&nbsp;<span class="code-property">max-width</span>: <span class="code-value">100%</span>;<br>
-                                        }<br><br>
-                                        <span class="code-comment">/* Tablette */</span><br>
-                                        <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">768px</span>) {<br>
-                                        &nbsp;&nbsp;<span class="code-selector">.container</span> {<br>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">padding</span>: <span class="code-value">2rem</span>;<br>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">max-width</span>: <span class="code-value">720px</span>;<br>
-                                        &nbsp;&nbsp;}<br>
-                                        }<br><br>
-                                        <span class="code-comment">/* Desktop */</span><br>
-                                        <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">1200px</span>) {<br>
-                                        &nbsp;&nbsp;<span class="code-selector">.container</span> {<br>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">max-width</span>: <span class="code-value">1140px</span>;<br>
-                                        &nbsp;&nbsp;}<br>
-                                        }
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4>Résultat :</h4>
-                                    <div class="demo-preview" style="height: 300px; background: white; border: 2px dashed #ccc;">
-                                        <div class="container" style="background: var(--light); padding: 1rem; max-width: 100%;">
-                                            <p>Ce contenu s'adapte selon les breakpoints !</p>
-                                            <p>Redimensionnez la fenêtre ou changez de preset.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <span class="code-comment">/* Desktop First */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">max-width</span>: <span class="code-value">1199px</span>) { ... }<br><br>
+                            
+                            <span class="code-comment">/* Combinaison de conditions */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">768px</span>) <span class="code-selector">and</span> (<span class="code-property">max-width</span>: <span class="code-value">1024px</span>) { ... }<br><br>
+                            
+                            <span class="code-comment">/* Mode sombre */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">prefers-color-scheme</span>: <span class="code-value">dark</span>) { ... }
                         </div>
                     </div>
                 </div>
@@ -671,81 +860,86 @@
                 <i class="fas fa-arrows-alt-h"></i>
                 <span>Flèches pour naviguer</span>
             </div>
-            <div class="slide-number">4/9</div>
+            <div class="slide-number">4/10</div>
         </div>
 
-        <!-- Slides 5-8: Contenu technique existant... -->
-
-        <!-- Slide 9: Conclusion Interactive -->
-        <div class="slide" id="slide9">
+        <!-- Slide 5: Breakpoints standards -->
+        <div class="slide" id="slide5">
             <div class="slide-header">
-                <h1 class="slide-title">Conclusion & Perspectives</h1>
-                <p class="slide-subtitle">Synthèse et évolutions futures</p>
+                <h1 class="slide-title">Breakpoints Standards</h1>
+                <p class="slide-subtitle">Points de rupture pour une conception cohérente</p>
                 <div class="slide-decoration"></div>
             </div>
             <div class="slide-content">
                 <div class="content-grid">
-                    <div class="content-text">
-                        <h3>🎯 Points Clés à Retenir</h3>
-                        <div class="interactive-demo">
-                            <div class="demo-controls">
-                                <button class="demo-btn active" data-summary="syntaxe">Syntaxe</button>
-                                <button class="demo-btn" data-summary="breakpoints">Breakpoints</button>
-                                <button class="demo-btn" data-summary="bestpractices">Bonnes Pratiques</button>
-                                <button class="demo-btn" data-summary="future">Futur</button>
-                            </div>
-                            <div class="demo-preview" id="summaryContent" style="min-height: 250px;">
-                                <div id="syntaxe-summary">
-                                    <h4>📝 Syntaxe Essentielle</h4>
-                                    <ul>
-                                        <li><code>@media (min-width: Xpx)</code> - Mobile First</li>
-                                        <li><code>@media (max-width: Xpx)</code> - Desktop First</li>
-                                        <li><code>@media (orientation: landscape)</code> - Orientation</li>
-                                        <li><code>@media (prefers-color-scheme: dark)</code> - Mode sombre</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="margin-top: 2rem;">
-                            <h3>📊 Évaluation Finale</h3>
-                            <div class="quiz-container">
-                                <div class="quiz-question">Selon vous, quelle est l'importance des Media Queries dans le développement web moderne ?</div>
-                                <div class="demo-controls" style="margin-top: 1rem;">
-                                    <button class="demo-btn" onclick="showFinalResult(1)">Optionnel</button>
-                                    <button class="demo-btn" onclick="showFinalResult(2)">Utile</button>
-                                    <button class="demo-btn" onclick="showFinalResult(3)">Essentiel</button>
-                                    <button class="demo-btn" onclick="showFinalResult(4)">Critique</button>
-                                </div>
-                                <div id="finalResult" style="margin-top: 1rem;"></div>
-                            </div>
-                        </div>
+                    <div class="content-text slide-in-left">
+                        <h3>Breakpoints recommandés</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Appareil</th>
+                                    <th>Breakpoint</th>
+                                    <th>Utilisation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>📱 Mobile</td>
+                                    <td>0 - 767px</td>
+                                    <td>Smartphones</td>
+                                </tr>
+                                <tr>
+                                    <td>📱 Mobile Large</td>
+                                    <td>480px</td>
+                                    <td>Grands smartphones</td>
+                                </tr>
+                                <tr>
+                                    <td>💻 Tablette</td>
+                                    <td>768px</td>
+                                    <td>Tablettes portrait</td>
+                                </tr>
+                                <tr>
+                                    <td>💻 Tablette Large</td>
+                                    <td>1024px</td>
+                                    <td>Tablettes paysage</td>
+                                </tr>
+                                <tr>
+                                    <td>🖥️ Desktop</td>
+                                    <td>1200px</td>
+                                    <td>Ordinateurs portables</td>
+                                </tr>
+                                <tr>
+                                    <td>🖥️ Desktop Large</td>
+                                    <td>1440px</td>
+                                    <td>Écrans larges</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="content-text">
-                        <h3>🚀 Perspectives d'Avenir</h3>
-                        <div class="features-list">
-                            <li><i class="fas fa-rocket"></i> <strong>Container Queries</strong> - Adaptation basée sur le conteneur</li>
-                            <li><i class="fas fa-palette"></i> <strong>CSS Nesting</strong> - Syntaxe plus intuitive</li>
-                            <li><i class="fas fa-bolt"></i> <strong>Performance</strong> - Media Queries natives plus rapides</li>
-                            <li><i class="fas fa-mobile-alt"></i> <strong>Nouveaux devices</strong> - Foldables, wearables</li>
-                        </div>
-
-                        <div style="margin-top: 2rem; padding: 1.5rem; background: var(--light); border-radius: 10px;">
-                            <h4>📚 Prochaines Étapes</h4>
-                            <ul style="margin-left: 1rem; margin-top: 1rem;">
-                                <li>Pratiquer l'approche Mobile First sur un projet réel</li>
-                                <li>Explorer les Container Queries (CSS Level 4)</li>
-                                <li>Apprendre les techniques avancées (prefers-reduced-motion, etc.)</li>
-                                <li>Suivre l'évolution des standards CSS</li>
-                            </ul>
-                        </div>
-
-                        <div style="margin-top: 2rem; text-align: center;">
-                            <div style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <p><strong>Merci pour votre attention !</strong></p>
-                            <p style="color: #666; margin-top: 0.5rem;">Des questions ?</p>
+                    <div class="content-text slide-in-right">
+                        <h3>Approche Mobile First</h3>
+                        <p>Concevoir d'abord pour mobile, puis ajouter des styles pour les écrans plus grands :</p>
+                        <div class="code-block">
+                            <span class="code-comment">/* Styles de base (mobile) */</span><br>
+                            <span class="code-selector">.container</span> {<br>
+                            &nbsp;&nbsp;<span class="code-property">width</span>: <span class="code-value">100%</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">padding</span>: <span class="code-value">1rem</span>;<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">/* Tablette */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">768px</span>) {<br>
+                            &nbsp;&nbsp;<span class="code-selector">.container</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">width</span>: <span class="code-value">750px</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">padding</span>: <span class="code-value">2rem</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">/* Desktop */</span><br>
+                            <span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">1200px</span>) {<br>
+                            &nbsp;&nbsp;<span class="code-selector">.container</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">width</span>: <span class="code-value">1140px</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }
                         </div>
                     </div>
                 </div>
@@ -754,8 +948,69 @@
                 <i class="fas fa-arrows-alt-h"></i>
                 <span>Flèches pour naviguer</span>
             </div>
-            <div class="slide-number">9/9</div>
+            <div class="slide-number">5/10</div>
         </div>
+
+        <!-- Slide 6: QR Code et démonstration mobile -->
+        <div class="slide" id="slide6">
+            <div class="slide-header">
+                <h1 class="slide-title">Testez en Temps Réel</h1>
+                <p class="slide-subtitle">Scannez le QR Code pour tester sur votre mobile</p>
+                <div class="slide-decoration"></div>
+            </div>
+            <div class="slide-content">
+                <div class="content-grid">
+                    <div class="content-text slide-in-left">
+                        <h3>Démonstration Interactive</h3>
+                        <p>Cette présentation elle-même utilise les Media Queries pour s'adapter à différents appareils.</p>
+                        
+                        <div class="demo-container">
+                            <h4>Comportement selon l'appareil :</h4>
+                            <div class="demo-devices">
+                                <div class="demo-device">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <p>Mobile</p>
+                                    <p class="device-desc">&lt; 768px</p>
+                                </div>
+                                <div class="demo-device">
+                                    <i class="fas fa-tablet-alt"></i>
+                                    <p>Tablette</p>
+                                    <p class="device-desc">768px - 1199px</p>
+                                </div>
+                                <div class="demo-device">
+                                    <i class="fas fa-desktop"></i>
+                                    <p>Desktop</p>
+                                    <p class="device-desc">≥ 1200px</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p style="margin-top: 1rem; font-size: 1.1rem;">
+                            <strong>Redimensionnez votre fenêtre</strong> pour voir les changements en direct !
+                        </p>
+                    </div>
+                    <div class="content-text slide-in-right">
+                        <h3>Scanner pour tester</h3>
+                        <div class="qr-code-container qr-pulse">
+                            <img src="qrcode.png" alt="QR Code pour tester la présentation sur mobile" class="qr-code">
+                        </div>
+                        <p class="qr-text">
+                            <i class="fas fa-mobile-alt"></i><br>
+                            Scannez ce QR Code avec votre téléphone<br>
+                            pour tester cette présentation en conditions réelles
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation-help">
+                <i class="fas fa-arrows-alt-h"></i>
+                <span>Flèches pour naviguer</span>
+            </div>
+            <div class="slide-number">6/10</div>
+        </div>
+
+        <!-- Les slides 7 à 10 continuent avec le même format adapté -->
+
     </div>
 
     <script>
@@ -763,213 +1018,8 @@
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
         let currentSlide = 0;
-
-        // Gestionnaire de viewport
-        function updateViewportSize() {
-            const width = window.innerWidth;
-            document.getElementById('viewportSize').textContent = `${width}px`;
-            
-            let breakpoint = 'Mobile';
-            let icon = 'fa-mobile-alt';
-            
-            if (width >= 1400) {
-                breakpoint = 'Desktop Large (≥1400px)';
-                icon = 'fa-desktop';
-            } else if (width >= 1200) {
-                breakpoint = 'Desktop (≥1200px)';
-                icon = 'fa-desktop';
-            } else if (width >= 992) {
-                breakpoint = 'Tablette Large (≥992px)';
-                icon = 'fa-tablet-alt';
-            } else if (width >= 768) {
-                breakpoint = 'Tablette (≥768px)';
-                icon = 'fa-tablet-alt';
-            } else {
-                breakpoint = 'Mobile (<768px)';
-                icon = 'fa-mobile-alt';
-            }
-            
-            document.getElementById('currentBreakpoint').innerHTML = 
-                `<i class="fas ${icon}"></i> Breakpoint : ${breakpoint}`;
-        }
-
-        // Simulateur de device
-        function setupDeviceSimulator() {
-            const buttons = document.querySelectorAll('.demo-btn[data-width]');
-            buttons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const width = this.getAttribute('data-width');
-                    const preview = document.getElementById('devicePreview');
-                    const deviceInfo = document.getElementById('deviceInfo');
-                    
-                    // Mettre à jour le bouton actif
-                    buttons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Mettre à jour l'affichage
-                    let deviceType = 'Mobile', icon = 'fa-mobile-alt';
-                    if (width >= 1024) {
-                        deviceType = 'Desktop';
-                        icon = 'fa-desktop';
-                    } else if (width >= 768) {
-                        deviceType = 'Tablette';
-                        icon = 'fa-tablet-alt';
-                    }
-                    
-                    deviceInfo.innerHTML = `
-                        <i class="fas ${icon}" style="font-size: 2rem;"></i>
-                        <p style="margin-top: 1rem; font-weight: 600;">${deviceType}</p>
-                        <p style="font-size: 1rem; color: #666;">Largeur : ${width}px</p>
-                        <p style="font-size: 0.9rem; color: #888; margin-top: 0.5rem;">
-                            Media Query: @media (min-width: ${width}px)
-                        </p>
-                    `;
-                });
-            });
-        }
-
-        // Système de quiz
-        function setupQuiz() {
-            const options = document.querySelectorAll('.quiz-option');
-            options.forEach(option => {
-                option.addEventListener('click', function() {
-                    // Retirer la sélection précédente dans le même groupe
-                    const parent = this.parentElement;
-                    parent.querySelectorAll('.quiz-option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
-                    
-                    // Sélectionner l'option actuelle
-                    this.classList.add('selected');
-                });
-            });
-        }
-
-        function checkQuiz(quizNumber) {
-            const options = document.querySelectorAll(`#slide3 .quiz-options .quiz-option`);
-            const result = document.getElementById(`quiz${quizNumber}Result`);
-            const status = document.getElementById(`q${quizNumber}Status`);
-            
-            let selectedOption = null;
-            options.forEach(option => {
-                if (option.classList.contains('selected')) {
-                    selectedOption = option;
-                }
-            });
-            
-            if (!selectedOption) {
-                result.textContent = 'Veuillez sélectionner une réponse';
-                result.className = 'quiz-result show incorrect';
-                return;
-            }
-            
-            const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
-            
-            if (isCorrect) {
-                result.textContent = '✅ Correct ! Bonne réponse.';
-                result.className = 'quiz-result show correct';
-                status.textContent = '✅';
-            } else {
-                result.textContent = '❌ Incorrect. Essayez encore !';
-                result.className = 'quiz-result show incorrect';
-            }
-            
-            // Mettre à jour toutes les options avec les bonnes/mauvaises réponses
-            options.forEach(option => {
-                option.classList.remove('correct', 'incorrect');
-                if (option.getAttribute('data-correct') === 'true') {
-                    option.classList.add('correct');
-                } else if (option === selectedOption) {
-                    option.classList.add('incorrect');
-                }
-            });
-        }
-
-        function showFinalResult(choice) {
-            const result = document.getElementById('finalResult');
-            const messages = [
-                "🤔 Les Media Queries sont pourtant fondamentales pour l'accessibilité !",
-                "👍 Utile, mais elles sont en réalité indispensables aujourd'hui",
-                "🎯 Exact ! Sans Media Queries, pas de web moderne",
-                "🚀 Tout à fait ! Le responsive design n'existerait pas sans elles"
-            ];
-            
-            result.innerHTML = `
-                <div style="padding: 1rem; background: rgba(57, 73, 171, 0.1); border-radius: 8px; border: 2px solid var(--accent);">
-                    <strong>${messages[choice - 1]}</strong>
-                    <p style="margin-top: 0.5rem; margin-bottom: 0;">Les Media Queries sont un pilier du développement web moderne.</p>
-                </div>
-            `;
-        }
-
-        // Système de résumé interactif
-        function setupSummary() {
-            const buttons = document.querySelectorAll('.demo-btn[data-summary]');
-            const content = document.getElementById('summaryContent');
-            
-            const summaries = {
-                syntaxe: `
-                    <h4>📝 Syntaxe Essentielle</h4>
-                    <ul>
-                        <li><code>@media (min-width: Xpx)</code> - Mobile First</li>
-                        <li><code>@media (max-width: Xpx)</code> - Desktop First</li>
-                        <li><code>@media (orientation: landscape)</code> - Orientation</li>
-                        <li><code>@media (prefers-color-scheme: dark)</code> - Mode sombre</li>
-                    </ul>
-                `,
-                breakpoints: `
-                    <h4>📱 Breakpoints Standards</h4>
-                    <ul>
-                        <li><strong>Mobile</strong>: 0 - 767px</li>
-                        <li><strong>Tablette</strong>: 768px - 1023px</li>
-                        <li><strong>Desktop</strong>: 1024px - 1439px</li>
-                        <li><strong>Large</strong>: ≥1440px</li>
-                    </ul>
-                `,
-                bestpractices: `
-                    <h4>✅ Bonnes Pratiques</h4>
-                    <ul>
-                        <li>Adopter l'approche Mobile First</li>
-                        <li>Utiliser des unités relatives (rem, %)</li>
-                        <li>Tester sur de vrais appareils</li>
-                        <li>Penser accessibilité (prefers-reduced-motion)</li>
-                    </ul>
-                `,
-                future: `
-                    <h4>🚀 Avenir des Media Queries</h4>
-                    <ul>
-                        <li><strong>Container Queries</strong> - Adaptation au conteneur parent</li>
-                        <li><strong>Nouvelles fonctionnalités</strong> - prefers-reduced-data, etc.</li>
-                        <li><strong>Performance</strong> - Implémentation native plus rapide</li>
-                    </ul>
-                `
-            };
-            
-            buttons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    buttons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const summaryType = this.getAttribute('data-summary');
-                    content.innerHTML = summaries[summaryType];
-                });
-            });
-        }
-
-        // Initialisation
-        function init() {
-            updateViewportSize();
-            window.addEventListener('resize', updateViewportSize);
-            setupDeviceSimulator();
-            setupQuiz();
-            setupSummary();
-            
-            // Navigation des slides (code existant)
-            initNavigationDots();
-            showSlide(currentSlide);
-        }
-
-        // Code de navigation des slides (identique à avant)
+        
+        // Initialisation des dots de navigation
         function initNavigationDots() {
             const dotsContainer = document.getElementById('navigationDots');
             dotsContainer.innerHTML = '';
@@ -982,39 +1032,69 @@
             });
         }
         
+        // Affichage d'une slide spécifique
         function showSlide(index) {
+            // Mise à jour de la slide active
             currentSlide = index;
+            
+            // Animation des slides
             slides.forEach((slide, i) => {
                 slide.classList.remove('active', 'prev', 'next');
-                if (i === index) slide.classList.add('active');
-                else if (i < index) slide.classList.add('prev');
-                else slide.classList.add('next');
+                
+                if (i === index) {
+                    slide.classList.add('active');
+                } else if (i < index) {
+                    slide.classList.add('prev');
+                } else {
+                    slide.classList.add('next');
+                }
             });
+            
+            // Mise à jour de la barre de progression
             updateProgressBar();
+            
+            // Mise à jour des dots de navigation
             updateNavigationDots();
+            
+            // Réinitialisation et application des animations
             resetAnimations();
             applyAnimations();
+            
+            // Scroll vers le haut de la slide
             const activeSlide = document.querySelector('.slide.active');
-            if (activeSlide) activeSlide.scrollTop = 0;
+            if (activeSlide) {
+                activeSlide.scrollTop = 0;
+            }
         }
         
+        // Navigation vers une slide spécifique
         function goToSlide(index) {
-            if (index >= 0 && index < totalSlides) showSlide(index);
+            if (index >= 0 && index < totalSlides) {
+                showSlide(index);
+            }
         }
         
+        // Slide suivante
         function nextSlide() {
-            if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
+            if (currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            }
         }
         
+        // Slide précédente
         function prevSlide() {
-            if (currentSlide > 0) goToSlide(currentSlide - 1);
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
         }
         
+        // Mise à jour de la barre de progression
         function updateProgressBar() {
             const progress = ((currentSlide + 1) / totalSlides) * 100;
             document.getElementById('progressBar').style.width = `${progress}%`;
         }
         
+        // Mise à jour des dots de navigation
         function updateNavigationDots() {
             const dots = document.querySelectorAll('.dot');
             dots.forEach((dot, index) => {
@@ -1022,43 +1102,139 @@
             });
         }
         
+        // Réinitialisation des animations
         function resetAnimations() {
-            document.querySelectorAll('.fade-in-up').forEach(el => {
+            const animatedElements = document.querySelectorAll('.fade-in-up, .slide-in-left, .slide-in-right, .stagger-animation > *');
+            animatedElements.forEach(el => {
                 el.style.animation = 'none';
                 el.style.opacity = '0';
             });
         }
         
+        // Application des animations
         function applyAnimations() {
             const currentSlideElement = slides[currentSlide];
-            const animatedElements = currentSlideElement.querySelectorAll('.fade-in-up');
+            const animatedElements = currentSlideElement.querySelectorAll('.fade-in-up, .slide-in-left, .slide-in-right');
+            
             animatedElements.forEach((el, index) => {
                 setTimeout(() => {
-                    el.style.animation = 'fadeInUp 0.6s ease forwards';
+                    el.style.animation = `${getAnimationName(el)} 0.6s ease forwards`;
                 }, index * 100);
+            });
+            
+            // Animation en cascade pour les éléments stagger
+            const staggerElements = currentSlideElement.querySelectorAll('.stagger-animation > *');
+            staggerElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.animation = `fadeInUp 0.5s ease forwards`;
+                }, index * 80);
             });
         }
         
+        // Obtention du nom d'animation
+        function getAnimationName(element) {
+            if (element.classList.contains('fade-in-up')) return 'fadeInUp';
+            if (element.classList.contains('slide-in-left')) return 'slideInLeft';
+            if (element.classList.contains('slide-in-right')) return 'slideInRight';
+            return 'fadeInUp';
+        }
+        
+        // Gestion de la navigation au clavier
         document.addEventListener('keydown', (e) => {
             switch(e.key) {
-                case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown':
-                    e.preventDefault(); nextSlide(); break;
-                case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
-                    e.preventDefault(); prevSlide(); break;
-                case 'Home': e.preventDefault(); goToSlide(0); break;
-                case 'End': e.preventDefault(); goToSlide(totalSlides - 1); break;
-                case 'f': case 'F11': e.preventDefault(); toggleFullscreen(); break;
+                case 'ArrowRight':
+                case 'ArrowDown':
+                case ' ':
+                case 'PageDown':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                    
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                case 'PageUp':
+                    e.preventDefault();
+                    prevSlide();
+                    break;
+                    
+                case 'Home':
+                    e.preventDefault();
+                    goToSlide(0);
+                    break;
+                    
+                case 'End':
+                    e.preventDefault();
+                    goToSlide(totalSlides - 1);
+                    break;
+                    
+                case 'f':
+                case 'F11':
+                    e.preventDefault();
+                    toggleFullscreen();
+                    break;
             }
         });
         
+        // Navigation tactile
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        });
+        
+        document.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            const touchEndY = e.changedTouches[0].screenY;
+            
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+            
+            // Seulement considérer les swipes significatifs
+            if (Math.abs(diffX) > 50 || Math.abs(diffY) > 50) {
+                // Swipe horizontal prédominant
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    if (diffX > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+                // Swipe vertical prédominant
+                else {
+                    if (diffY > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            }
+        });
+        
+        // Mode plein écran
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen();
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Erreur plein écran: ${err.message}`);
+                });
             } else {
                 document.exitFullscreen();
             }
         }
-
+        
+        // Initialisation
+        function init() {
+            initNavigationDots();
+            showSlide(currentSlide);
+            
+            // Affichage des informations de débogage
+            console.log('🎓 Présentation académique sur les Media Queries');
+            console.log('Navigation: Flèches | Espace | Swipe');
+            console.log('Plein écran: F | F11');
+        }
+        
+        // Lancement au chargement
         window.addEventListener('load', init);
     </script>
 </body>
