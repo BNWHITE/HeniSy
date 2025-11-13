@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Queries CSS | Seydi & Adel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--light);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-authors {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-weight: bold;
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Section */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* QR Code Section */
+        .qr-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .qr-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .qr-code {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+        }
+
+        .qr-text {
+            color: white;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            font-weight: bold;
+        }
+
+        .qr-subtext {
+            color: rgba(255,255,255,0.9);
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Demo Cards */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .demo-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .demo-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .demo-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Code Block */
+        .code-showcase {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            position: relative;
+        }
+
+        .code-showcase::before {
+            content: 'CSS';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .code-showcase code {
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Interactive Demo */
+        .live-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .device-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .device {
+            background: white;
+            color: var(--dark);
+            padding: 2rem;
+            border-radius: 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .device:hover {
+            transform: scale(1.1);
+        }
+
+        /* Breakpoint Indicator */
+        .breakpoint-badge {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            z-index: 999;
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .breakpoint-badge::before {
+            content: '🖥️ Desktop';
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .features-list li {
+            padding: 1rem;
+            margin: 1rem 0;
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .features-list li:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateX(10px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 2px solid var(--primary);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .breakpoint-badge::before {
+                content: '💻 Tablette';
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .demo-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .breakpoint-badge::before {
+                content: '📱 Mobile';
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(15, 23, 42, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.3s ease;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .device-preview {
+                grid-template-columns: 1fr;
+            }
+
+            .qr-code {
+                width: 200px;
+                height: 200px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .breakpoint-badge {
+                bottom: 1rem;
+                right: 1rem;
+                font-size: 0.9rem;
+                padding: 0.8rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .breakpoint-badge::before {
+                content: '📱 Petit écran';
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">📱 Media Queries</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#demo">Démo Live</a></li>
+                <li><a href="#qrcode">Scanner QR</a></li>
+                <li><a href="#stats">Statistiques</a></li>
+                <li><a href="#code">Exemples</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <h1>🎨 Les Media Queries</h1>
+            <p>L'art de créer des sites web responsives</p>
+            <a href="#demo" class="cta-button">Voir la magie ✨</a>
+            <div class="hero-authors">Par Seydi & Adel 🚀</div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats">
+        <h2 class="section-title">📊 Pourquoi c'est crucial ?</h2>
+        <div class="stats-grid fade-in">
+            <div class="stat-card">
+                <div class="stat-number">63%</div>
+                <div class="stat-label">Du trafic web vient du mobile en 2025</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8K+</div>
+                <div class="stat-label">Modèles d'appareils différents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">57%</div>
+                <div class="stat-label">Des utilisateurs ne recommandent pas un site mobile mal conçu</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section id="demo">
+        <h2 class="section-title">✨ Démonstration Interactive</h2>
+        <div class="live-demo fade-in">
+            <h3 style="color: white; margin-bottom: 2rem;">Redimensionnez votre fenêtre et regardez ! 👇</h3>
+            <div class="device-preview">
+                <div class="device">📱 Mobile<br>1 colonne</div>
+                <div class="device">💻 Tablette<br>2 colonnes</div>
+                <div class="device">🖥️ Desktop<br>3 colonnes</div>
+            </div>
+        </div>
+
+        <div class="demo-grid fade-in">
+            <div class="demo-card">
+                <h3>🎯 Mobile First</h3>
+                <p>On commence par concevoir pour mobile, puis on adapte pour les écrans plus grands. C'est la meilleure approche en 2025 !</p>
+            </div>
+            <div class="demo-card">
+                <h3>⚡ Performance</h3>
+                <p>Les media queries permettent de charger uniquement les ressources nécessaires pour chaque appareil.</p>
+            </div>
+            <div class="demo-card">
+                <h3>🎨 UX Optimale</h3>
+                <p>Chaque utilisateur voit une interface parfaitement adaptée à son écran.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- QR Code Section -->
+    <section class="qr-section" id="qrcode">
+        <h2 style="color: white; font-size: 2.5rem; margin-bottom: 2rem;">📲 Scannez pour tester sur votre mobile !</h2>
+        <div class="qr-container">
+            <svg class="qr-code" viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg">
+                <!-- QR Code simplifié pour la démo -->
+                <rect width="29" height="29" fill="white"/>
+                <path d="M0,0 h7v7h-7z M9,0 h2v1h-2z M12,0 h1v1h-1z M14,0 h2v1h-2z M17,0 h2v1h-2z M22,0 h7v7h-7z M1,1 h5v5h-5z M23,1 h5v5h-5z M2,2 h3v3h-3z M24,2 h3v3h-3z M9,2 h1v1h-1z M11,2 h1v1h-1z M13,2 h2v1h-2z M16,2 h3v1h-3z M9,3 h2v1h-2z M12,3 h1v1h-1z M14,3 h1v1h-1z M16,3 h1v1h-1z M18,3 h1v1h-1z M20,3 h1v1h-1z M9,4 h1v1h-1z M11,4 h4v1h-4z M17,4 h1v1h-1z M19,4 h1v1h-1z M9,5 h2v1h-2z M12,5 h1v1h-1z M14,5 h2v1h-2z M17,5 h2v1h-2z M0,8 h1v1h-1z M2,8 h3v1h-3z M6,8 h1v1h-1z M9,8 h1v1h-1z M11,8 h4v1h-4z M16,8 h2v1h-2z M19,8 h1v1h-1z M21,8 h2v1h-2z M24,8 h3v1h-3z M28,8 h1v1h-1z M0,9 h1v1h-1z M3,9 h1v1h-1z M5,9 h2v1h-2z M8,9 h3v1h-3z M13,9 h1v1h-1z M16,9 h1v1h-1z M19,9 h1v1h-1z M21,9 h1v1h-1z M25,9 h1v1h-1z M27,9 h2v1h-2z M1,10 h1v1h-1z M3,10 h2v1h-2z M6,10 h3v1h-3z M10,10 h1v1h-1z M12,10 h2v1h-2z M15,10 h1v1h-1z M17,10 h2v1h-2z M20,10 h3v1h-3z M24,10 h1v1h-1z M26,10 h1v1h-1z M28,10 h1v1h-1z M0,11 h2v1h-2z M3,11 h1v1h-1z M5,11 h3v1h-3z M9,11 h3v1h-3z M13,11 h1v1h-1z M15,11 h1v1h-1z M18,11 h1v1h-1z M20,11 h1v1h-1z M22,11 h2v1h-2z M25,11 h1v1h-1z M27,11 h2v1h-2z M1,12 h1v1h-1z M3,12 h2v1h-2z M6,12 h1v1h-1z M9,12 h2v1h-2z M12,12 h3v1h-3z M16,12 h1v1h-1z M18,12 h3v1h-3z M22,12 h1v1h-1z M25,12 h2v1h-2z M28,12 h1v1h-1z M0,13 h1v1h-1z M2,13 h1v1h-1z M4,13 h1v1h-1z M6,13 h2v1h-2z M9,13 h1v1h-1z M11,13 h1v1h-1z M13,13 h3v1h-3z M17,13 h2v1h-2z M20,13 h2v1h-2z M23,13 h1v1h-1z M25,13 h1v1h-1z M27,13 h2v1h-2z M2,14 h3v1h-3z M6,14 h1v1h-1z M9,14 h2v1h-2z M12,14 h1v1h-1z M15,14 h3v1h-3z M19,14 h2v1h-2z M22,14 h2v1h-2z M25,14 h2v1h-2z M28,14 h1v1h-1z M0,15 h1v1h-1z M2,15 h1v1h-1z M4,15 h2v1h-2z M8,15 h3v1h-3z M12,15 h1v1h-1z M14,15 h2v1h-2z M17,15 h1v1h-1z M19,15 h3v1h-3z M23,15 h1v1h-1z M25,15 h1v1h-1z M27,15 h1v1h-1z M1,16 h2v1h-2z M4,16 h1v1h-1z M6,16 h1v1h-1z M8,16 h1v1h-1z M11,16 h2v1h-2z M14,16 h1v1h-1z M16,16 h1v1h-1z M18,16 h3v1h-3z M22,16 h2v1h-2z M26,16 h1v1h-1z M28,16 h1v1h-1z M9,17 h2v1h-2z M12,17 h1v1h-1z M14,17 h2v1h-2z M17,17 h2v1h-2z M20,17 h3v1h-3z M24,17 h1v1h-1z M26,17 h3v1h-3z M0,18 h2v1h-2z M3,18 h2v1h-2z M6,18 h2v1h-2z M9,18 h1v1h-1z M11,18 h2v1h-2z M14,18 h1v1h-1z M16,18 h2v1h-2z M19,18 h2v1h-2z M22,18 h1v1h-1z M24,18 h1v1h-1z M26,18 h1v1h-1z M28,18 h1v1h-1z M1,19 h1v1h-1z M3,19 h1v1h-1z M7,19 h2v1h-2z M10,19 h2v1h-2z M13,19 h3v1h-3z M17,19 h1v1h-1z M19,19 h4v1h-4z M24,19 h3v1h-3z M28,19 h1v1h-1z M0,20 h1v1h-1z M2,20 h1v1h-1z M4,20 h1v1h-1z M7,20 h1v1h-1z M9,20 h3v1h-3z M13,20 h1v1h-1z M15,20 h1v1h-1z M17,20 h1v1h-1z M19,20 h2v1h-2z M22,20 h2v1h-2z M25,20 h1v1h-1z M27,20 h2v1h-2z M0,21 h7v1h-7z M8,21 h1v1h-1z M10,21 h1v1h-1z M12,21 h2v1h-2z M15,21 h3v1h-3z M19,21 h1v1h-1z M21,21 h2v1h-2z M24,21 h1v1h-1z M26,21 h1v1h-1z M28,21 h1v1h-1z M1,22 h1v1h-1z M3,22 h3v1h-3z M9,22 h3v1h-3z M13,22 h1v1h-1z M16,22 h1v1h-1z M18,22 h2v1h-2z M21,22 h1v1h-1z M23,22 h3v1h-3z M27,22 h2v1h-2z M1,23 h1v1h-1z M3,23 h3v1h-3z M8,23 h1v1h-1z M11,23 h2v1h-2z M14,23 h1v1h-1z M16,23 h1v1h-1z M18,23 h3v1h-3z M22,23 h1v1h-1z M24,23 h2v1h-2z M27,23 h1v1h-1z M1,24 h1v1h-1z M3,24 h3v1h-3z M8,24 h2v1h-2z M11,24 h1v1h-1z M13,24 h3v1h-3z M17,24 h2v1h-2z M20,24 h1v1h-1z M22,24 h1v1h-1z M24,24 h1v1h-1z M26,24 h3v1h-3z M1,25 h1v1h-1z M3,25 h3v1h-3z M8,25 h1v1h-1z M10,25 h2v1h-2z M13,25 h1v1h-1z M15,25 h2v1h-2z M18,25 h1v1h-1z M20,25 h3v1h-3z M24,25 h3v1h-3z M28,25 h1v1h-1z M1,26 h5v1h-5z M8,26 h1v1h-1z M10,26 h1v1h-1z M12,26 h2v1h-2z M15,26 h2v1h-2z M18,26 h1v1h-1z M20,26 h1v1h-1z M23,26 h2v1h-2z M26,26 h1v1h-1z M0,22 h7v7h-7z M22,22 h7v7h-7z M1,23 h5v5h-5z M23,23 h5v5h-5z M2,24 h3v3h-3z M24,24 h3v3h-3z" fill="black"/>
+            </svg>
+        </div>
+        <p class="qr-text">👆 Scannez ce QR Code avec votre téléphone</p>
+        <p class="qr-subtext">Vous verrez ce site parfaitement adapté à votre écran mobile ! 📱✨</p>
+    </section>
+
+    <!-- Code Examples Section -->
+    <section id="code">
+        <h2 class="section-title">💻 Exemples de Code</h2>
+        
+        <div class="fade-in">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">1️⃣ Syntaxe de Base</h3>
+            <div class="code-showcase">
+                <code>
+/* Mobile First Approach */<br>
+.container {<br>
+&nbsp;&nbsp;width: 100%;<br>
+&nbsp;&nbsp;padding: 15px;<br>
+}<br><br>
+/* Tablette (768px et plus) */<br>
+@media (min-width: 768px) {<br>
+&nbsp;&nbsp;.container {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;width: 750px;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;padding: 30px;<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+/* Desktop (1200px et plus) */<br>
+@media (min-width: 1200px) {<br>
+&nbsp;&nbsp;.container {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;width: 1140px;<br>
+&nbsp;&nbsp;}<br>
+}
+                </code>
+            </div>
+        </div>
+
+        <div class="fade-in" style="margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">2️⃣ Navigation Responsive</h3>
+            <div class="code-showcase">
+                <code>
+/* Desktop - Menu horizontal */<br>
+.nav-links {<br>
+&nbsp;&nbsp;display: flex;<br>
+&nbsp;&nbsp;gap: 2rem;<br>
+}<br><br>
+/* Mobile - Menu burger */<br>
+@media (max-width: 768px) {<br>
+&nbsp;&nbsp;.nav-links {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;position: fixed;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;flex-direction: column;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;left: -100%;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;transition: left 0.3s;<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;.nav-links.active {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;left: 0;<br>
+&nbsp;&nbsp;}<br>
+}
+                </code>
+            </div>
+        </div>
+
+        <div class="fade-in" style="margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">3️⃣ Grid Adaptative</h3>
+            <div class="code-showcase">
+                <code>
+.grid {<br>
+&nbsp;&nbsp;display: grid;<br>
+&nbsp;&nbsp;gap: 2rem;<br>
+}<br><br>
+/* Mobile - 1 colonne */<br>
+@media (min-width: 0px) {<br>
+&nbsp;&nbsp;.grid { grid-template-columns: 1fr; }<br>
+}<br><br>
+/* Tablette - 2 colonnes */<br>
+@media (min-width: 768px) {<br>
+&nbsp;&nbsp;.grid { grid-template-columns: repeat(2, 1fr); }<br>
+}<br><br>
+/* Desktop - 3 colonnes */<br>
+@media (min-width: 1024px) {<br>
+&nbsp;&nbsp;.grid { grid-template-columns: repeat(3, 1fr); }<br>
+}
+                </code>
+            </div>
+        </div>
+
+        <div class="fade-in" style="margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">4️⃣ Dark Mode (Avancé)</h3>
+            <div class="code-showcase">
+                <code>
+/* Détecte la préférence système */<br>
+@media (prefers-color-scheme: dark) {<br>
+&nbsp;&nbsp;body {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;background: #1a1a1a;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;color: #ffffff;<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;.card {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;background: #2d2d2d;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;border-color: #444;<br>
+&nbsp;&nbsp;}<br>
+}
+                </code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section>
+        <h2 class="section-title">🎯 Points Clés à Retenir</h2>
+        <ul class="features-list fade-in">
+            <li><strong>📱 Mobile First :</strong> Commencez par concevoir pour mobile, puis adaptez pour les écrans plus grands avec <code>min-width</code></li>
+            <li><strong>🎨 Breakpoints Standards :</strong> 480px (mobile), 768px (tablette), 1024px (laptop), 1440px (desktop)</li>
+            <li><strong>⚡ Performance :</strong> Chargez uniquement les styles nécessaires pour chaque appareil</li>
+            <li><strong>🔍 Test Crucial :</strong> Testez sur de vrais appareils, pas seulement en mode développeur</li>
+            <li><strong>🎭 Dark Mode :</strong> Utilisez <code>prefers-color-scheme</code> pour respecter les préférences utilisateur</li>
+            <li><strong>♿ Accessibilité :</strong> <code>prefers-reduced-motion</code> pour désactiver les animations si nécessaire</li>
+            <li><strong>📐 Unités Relatives :</strong> Utilisez <code>rem</code>, <code>em</code>, <code>%</code> au lieu de pixels fixes</li>
+            <li><strong>🔄 Orientation :</strong> N'oubliez pas <code>orientation: portrait/landscape</code> pour les tablettes</li>
+        </ul>
+    </section>
+
+    <!-- Best Practices Section -->
+    <section>
+        <h2 class="section-title">✅ Best Practices</h2>
+        <div class="demo-grid fade-in">
+            <div class="demo-card">
+                <h3>✅ À FAIRE</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li>✓ Mobile First approach</li>
+                    <li>✓ Tester sur vrais devices</li>
+                    <li>✓ Utiliser des unités relatives</li>
+                    <li>✓ 3-5 breakpoints max</li>
+                    <li>✓ Meta viewport tag</li>
+                </ul>
+            </div>
+            <div class="demo-card">
+                <h3>❌ À ÉVITER</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li>✗ Trop de breakpoints</li>
+                    <li>✗ Pixels fixes partout</li>
+                    <li>✗ Oublier le viewport</li>
+                    <li>✗ Desktop First (2025)</li>
+                    <li>✗ Ne pas tester mobile</li>
+                </ul>
+            </div>
+            <div class="demo-card">
+                <h3>🔥 PRO TIPS</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li>🎯 Container queries (2025)</li>
+                    <li>⚡ Lighthouse testing</li>
+                    <li>🎨 Figma responsive</li>
+                    <li>📊 Analytics mobile</li>
+                    <li>🚀 Progressive Enhancement</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real World Examples -->
+    <section>
+        <h2 class="section-title">🌍 Exemples du Monde Réel</h2>
+        <div class="demo-grid fade-in">
+            <div class="demo-card">
+                <h3>🎬 Netflix</h3>
+                <p>6 colonnes sur desktop → 2 sur mobile. Grid responsive parfait pour leur catalogue de films.</p>
+            </div>
+            <div class="demo-card">
+                <h3>🛍️ Amazon</h3>
+                <p>Navigation complète sur desktop, menu burger sur mobile. Plus de 70% de leurs ventes viennent du mobile !</p>
+            </div>
+            <div class="demo-card">
+                <h3>📱 Instagram</h3>
+                <p>Colonnes multiples sur desktop, scroll vertical sur mobile. Adaptation totale de l'UX selon l'appareil.</p>
+            </div>
+            <div class="demo-card">
+                <h3>📰 Medium</h3>
+                <p>Largeur de texte adaptée : 700px sur desktop, 100% sur mobile pour une lecture optimale.</p>
+            </div>
+            <div class="demo-card">
+                <h3>🎵 Spotify</h3>
+                <p>Player fixe en bas sur desktop, interface simplifiée sur mobile avec gestes tactiles.</p>
+            </div>
+            <div class="demo-card">
+                <h3>💼 LinkedIn</h3>
+                <p>3 colonnes desktop → 1 colonne mobile. Cards empilées pour une navigation fluide.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section>
+        <h2 class="section-title">🛠️ Outils de Développement</h2>
+        <div class="demo-grid fade-in">
+            <div class="demo-card">
+                <h3>🔍 DevTools</h3>
+                <p><strong>Chrome DevTools</strong><br>F12 → Toggle Device Mode (Ctrl+Shift+M)<br>Simulez différents appareils</p>
+            </div>
+            <div class="demo-card">
+                <h3>🎨 Figma</h3>
+                <p><strong>Design Responsive</strong><br>Auto Layout, Constraints<br>Prototypes multi-devices</p>
+            </div>
+            <div class="demo-card">
+                <h3>📱 BrowserStack</h3>
+                <p><strong>Tests Réels</strong><br>Testez sur +3000 devices<br>iOS, Android, Desktop</p>
+            </div>
+            <div class="demo-card">
+                <h3>⚡ Lighthouse</h3>
+                <p><strong>Performance Audit</strong><br>Score mobile/desktop<br>Recommandations SEO</p>
+            </div>
+            <div class="demo-card">
+                <h3>🎯 Responsinator</h3>
+                <p><strong>Preview Rapide</strong><br>Visualisation multi-devices<br>iPhone, iPad, Android</p>
+            </div>
+            <div class="demo-card">
+                <h3>🚀 VS Code Extensions</h3>
+                <p><strong>Live Server</strong><br>Hot Reload automatique<br>Test en temps réel</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenge Section -->
+    <section style="background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 5rem 2rem; border-radius: 30px; text-align: center;">
+        <h2 style="color: white; font-size: 2.5rem; margin-bottom: 2rem;">🏆 Challenge pour Vous !</h2>
+        <p style="color: white; font-size: 1.3rem; margin-bottom: 2rem;">
+            Créez un site responsive SANS framework CSS<br>
+            (pas de Bootstrap, pas de Tailwind - juste HTML/CSS pur)
+        </p>
+        <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 15px; max-width: 800px; margin: 2rem auto; backdrop-filter: blur(10px);">
+            <p style="color: white; font-size: 1.1rem; line-height: 1.8;">
+                <strong>Objectifs :</strong><br>
+                ✅ Navigation responsive (burger menu sur mobile)<br>
+                ✅ Grid adaptatif (3 colonnes → 2 → 1)<br>
+                ✅ Images responsives<br>
+                ✅ Dark mode avec prefers-color-scheme<br>
+                ✅ Animations fluides
+            </p>
+        </div>
+        <p style="color: white; font-size: 1.2rem; margin-top: 2rem; font-weight: bold;">
+            🎯 Vous avez 1 semaine ! Montrez-nous ce que vous savez faire ! 💪
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Merci pour votre attention ! 🚀</h3>
+            <p style="margin-bottom: 1rem;">Une présentation réalisée avec ❤️ par Seydi & Adel</p>
+            <p style="color: #64748b; font-size: 0.9rem;">École d'Ingénieurs Informatique - 1ère Année - 2025</p>
+            <div class="social-links">
+                <a href="#" title="Questions?">💬</a>
+                <a href="#" title="GitHub">💻</a>
+                <a href="#" title="Email">📧</a>
+            </div>
+            <p style="margin-top: 2rem; color: #64748b; font-size: 0.85rem;">
+                Ce site lui-même est 100% responsive ! Testez-le sur votre mobile 📱
+            </p>
+        </div>
+    </footer>
+
+    <!-- Breakpoint Indicator -->
+    <div class="breakpoint-badge"></div>
+
+    <script>
+        // Menu Toggle pour mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Animation du burger
+            const spans = menuToggle.querySelectorAll('span');
+            spans[0].style.transform = navLinks.classList.contains('active') ? 'rotate(45deg) translate(6px, 6px)' : 'none';
+            spans[1].style.opacity = navLinks.classList.contains('active') ? '0' : '1';
+            spans[2].style.transform = navLinks.classList.contains('active') ? 'rotate(-45deg) translate(6px, -6px)' : 'none';
+        });
+
+        // Fermer le menu au clic sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const spans = menuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar background au scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+                navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+            } else {
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Effet parallaxe léger sur le hero
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+            
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                document.body.style.animation = 'rainbow 2s linear infinite';
+                setTimeout(() => {
+                    document.body.style.animation = 'none';
+                }, 5000);
+            }
+        });
+
+        // Animation rainbow pour l'easter egg
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Console easter egg
+        console.log('%c🎨 Bravo d\'avoir ouvert la console ! 🚀', 'font-size: 20px; color: #6366f1; font-weight: bold;');
+        console.log('%cCe site est 100% fait à la main avec HTML, CSS et Vanilla JS !', 'font-size: 14px; color: #8b5cf6;');
+        console.log('%cPar Seydi & Adel 💪', 'font-size: 14px; color: #ec4899;');
+    </script>
+</body>
+</html>
